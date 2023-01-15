@@ -3,7 +3,7 @@ import $ from "jquery";
 import Box from "./Box";
 
 export default function CategoryColumn(props) {
-  const { id, category, questions, updateScore } = props;
+  const { id, category, questions } = props;
   return (
     <div className={styles.category}>
       <div className={styles.categoryTitleWrapper}>
@@ -17,7 +17,6 @@ export default function CategoryColumn(props) {
             answer={question.Answer}
             categoryId={id}
             questionId={index}
-            updateScore={updateScore}
           />
         );
       })}

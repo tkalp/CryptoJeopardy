@@ -1,13 +1,14 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import styles from "./Box.module.scss";
 import $ from "jquery";
 const classNames = require("classnames");
+import { ACTION_TYPES, GameContext } from "@/lib/game-context";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function Box(props) {
-  const { value, question, answer, categoryId, questionId, updateScore } =
-    props;
+  const { dispatch, state } = useContext(GameContext);
+  const { value, question, answer, categoryId, questionId } = props;
   const identifier = categoryId + "" + questionId;
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [enteredAnswer, setEnteredAnswer] = useState("");
@@ -38,14 +39,22 @@ export default function Box(props) {
   }
 
   function buttonHandler(event) {
+    let correctAnswer = false;
     event.preventDefault();
     if (enteredAnswer.toLowerCase() == answer.toLowerCase()) {
-      console.log("Correct");
-      updateScore(value);
-    } else {
-      console.log("incorrect");
-      updateScore(-1 * value);
+      correctAnswer = true;
     }
+
+    dispatch({
+      type: ACTION_TYPES.SET_SCORE,
+      payload: {
+        addedScore: correctAnswer ? value : -1 * value,
+      },
+    });
+
+    dispatch({
+      type: ACTION_TYPES.SUBTRACT_QUESTION_COUNT,
+    });
 
     $(`#box-question_${identifier}`).hide();
     $(`#answer-form_${identifier}`).hide();
@@ -53,6 +62,7 @@ export default function Box(props) {
     // revert the box
     $(target).toggleClass(styles.fullScreen);
     /// We then have to revert, calculate the points, etc...
+    console.log(state.totalQuestions);
   }
 
   return (
