@@ -1,0 +1,34 @@
+{
+    "Questions": [
+        {
+            "CategoryID": 1,
+            "Question": "An electronic document provided by Certifying Authorities that binds information that identifies the owner with a public key.",
+            "Answer": "What is a certificate?",
+            "Value": 200
+        },
+        {
+            "CategoryID": 1,
+            "Question": "Term for extracting information that has been encrypted.",
+            "Answer": "What is decryption?",
+            "Value": 400
+        },
+        {
+            "CategoryID": 1,
+            "Question": "A string of bits that allows someone to encrypt or decrypt data.",
+            "Answer": "What is a key?",
+            "Value": 600
+        },
+        {
+            "CategoryID": 1,
+            "Question": "A device or algorithm that generates a sequence of numbers that has no set pattern.",
+            "Answer": "What is a random number generator?",
+            "Value": 800
+        },
+        {
+            "CategoryID": 1,
+            "Question": "The original cipher that was developed to encrypt teletype traffic, patented in 1919.",
+            "Answer": "What is the Vernam Cipher?",
+            "Value": 1000
+        }
+    ]
+}

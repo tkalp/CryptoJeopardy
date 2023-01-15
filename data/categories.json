@@ -1,0 +1,24 @@
+{
+    "Categories": [
+        {
+            "ID": 1,
+            "Name": "Terminology"
+        },
+        {
+            "ID": 2,
+            "Name": "Symmetric Key Encryption"
+        },
+        {
+            "ID": 3,
+            "Name": "Public Key Infrastructure"
+        },
+        {
+            "ID": 4,
+            "Name": "Block Cipers"
+        },
+        {
+            "ID": 5,
+            "Name": "Hash Function"
+        }
+    ]
+}

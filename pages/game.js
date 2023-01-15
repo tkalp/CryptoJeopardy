@@ -1,19 +1,36 @@
 import CategoryColumn from "@/components/CategoryColumn";
 import styles from "@/styles/Game.module.css";
+import { getCategories } from "../lib/getCategories";
 
 async function sleep(ms) {
   await new Promise((resolve) => setTimeout(resolve, ms));
 }
 
-export default function Game() {
+export async function getServerSideProps(context) {
+  // load questions on server
+  const result = getCategories();
+  return {
+    props: {
+      categories: result,
+    }, // will be passed to the page component as props
+  };
+}
+
+export default function Game(props) {
+  const { categories } = props;
+  console.log(categories);
   return (
     <>
       <main className={styles.main}>
-        <CategoryColumn category="Symmetric Key Encryption" id={1} />
-        <CategoryColumn category="Blockchain" id={2} />
-        <CategoryColumn category="Transport Layer Security" id={3} />
-        <CategoryColumn category="Discrete Logarithms" id={4} />
-        <CategoryColumn category="Diffie-Hellman" id={5} />
+        {categories.map((category) => {
+          return (
+            <CategoryColumn
+              category={category.Name}
+              id={category.ID}
+              questions={category.Questions}
+            />
+          );
+        })}
       </main>
     </>
   );
