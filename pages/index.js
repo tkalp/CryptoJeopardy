@@ -1,5 +1,4 @@
 import Head from "next/head";
-import { Inter } from "@next/font/google";
 import styles from "@/styles/Home.module.css";
 import Image from "next/image";
 import Link from "next/link";
@@ -7,7 +6,8 @@ import { useState } from "react";
 import ReactAudioPlayer from "react-audio-player";
 import $ from "jquery";
 
-const inter = Inter({ subsets: ["latin"] });
+// import { Inter } from "@next/font/google";
+// const inter = Inter({ subsets: ["latin"] });
 
 export default function Home() {
   const volumeOnPath = "/img/volume-up.png";

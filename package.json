@@ -10,12 +10,14 @@
   },
   "dependencies": {
     "@next/font": "13.1.2",
+    "classnames": "^2.3.2",
     "crypto": "^1.0.1",
     "jquery": "^3.6.3",
     "merkletreejs": "^0.3.9",
     "next": "13.1.2",
     "react": "18.2.0",
     "react-audio-player": "^0.17.0",
-    "react-dom": "18.2.0"
+    "react-dom": "18.2.0",
+    "sass": "^1.57.1"
   }
 }
