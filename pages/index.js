@@ -53,7 +53,7 @@ export default function Home() {
             <Link href="/game">
               <button className={styles.button}>Start Game</button>
             </Link>
-            <button className={styles.button}>High Scores</button>
+            {/* <button className={styles.button}>High Scores</button> */}
           </div>
         </div>
       </main>

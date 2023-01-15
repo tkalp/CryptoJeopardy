@@ -6,7 +6,8 @@ const classNames = require("classnames");
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 export default function Box(props) {
-  const { value, question, answer, categoryId, questionId } = props;
+  const { value, question, answer, categoryId, questionId, updateScore } =
+    props;
   const identifier = categoryId + "" + questionId;
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [enteredAnswer, setEnteredAnswer] = useState("");
@@ -40,13 +41,16 @@ export default function Box(props) {
     event.preventDefault();
     if (enteredAnswer.toLowerCase() == answer.toLowerCase()) {
       console.log("Correct");
+      updateScore(value);
     } else {
       console.log("incorrect");
+      updateScore(-1 * value);
     }
 
     $(`#box-question_${identifier}`).hide();
     $(`#answer-form_${identifier}`).hide();
     const target = $(event.target).closest(".main-value-box");
+    // revert the box
     $(target).toggleClass(styles.fullScreen);
     /// We then have to revert, calculate the points, etc...
   }
@@ -58,7 +62,7 @@ export default function Box(props) {
     >
       <h1 id="value">{"$" + props.value}</h1>
       <p className={styles.boxQuestion} id={`box-question_${identifier}`}>
-        {props.question}
+        {question}
       </p>
       <form className={styles.answerForm} id={`answer-form_${identifier}`}>
         <div className={styles.answerInputWrapper}>

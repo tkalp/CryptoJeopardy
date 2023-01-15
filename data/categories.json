@@ -18,7 +18,19 @@
         },
         {
             "ID": 5,
-            "Name": "Hash Function"
+            "Name": "Hash Functions"
+        },
+        {
+            "ID": 6,
+            "Name": "Random Crypto Knowledge"
+        },
+        {
+            "ID": 7,
+            "Name": "Blockchain"
+        },
+        {
+            "ID": 8,
+            "Name": "Key Exchanges"
         }
     ]
 }
