@@ -36,7 +36,7 @@ export default function Game(props) {
   }, [totalQuestions]);
 
   return (
-    <>
+    <div className={styles.fullWrapper}>
       {state.totalQuestions > 0 && (
         <main className={styles.main}>
           <div className={styles.columnsWrapper}>
@@ -54,11 +54,13 @@ export default function Game(props) {
           <div className={styles.scoreWrapper}>
             <h1>Score: {score}</h1>
             <br />
-            <h1>Questions Left: {state.totalQuestions}</h1>
+            <h1 className={styles.questionCounter}>
+              Questions Left: {state.totalQuestions}
+            </h1>
           </div>
         </main>
       )}
       {state.totalQuestions == 0 && <div>No Questions Left</div>}
-    </>
+    </div>
   );
 }
