@@ -3,6 +3,7 @@ import styles from "@/styles/Game.module.scss";
 import { useContext, useState, useEffect } from "react";
 import { getCategoriesAndQuestions } from "../lib/getJeopardyData";
 import { ACTION_TYPES, GameContext } from "@/lib/game-context";
+import ReactAudioPlayer from "react-audio-player";
 
 async function sleep(ms) {
   await new Promise((resolve) => setTimeout(resolve, ms));
@@ -39,6 +40,12 @@ export default function Game(props) {
     <div className={styles.fullWrapper}>
       {state.totalQuestions > 0 && (
         <main className={styles.main}>
+          <ReactAudioPlayer
+            id="theme-music-player"
+            src="audio/jeopardy-correct-answer.mp3"
+            loop={true}
+            controls
+          />
           <div className={styles.columnsWrapper}>
             {categories.map((category, index) => {
               return (

@@ -1,10 +1,11 @@
 import { useState, useContext } from "react";
 import styles from "./Box.module.scss";
 import $ from "jquery";
-const classNames = require("classnames");
 import { ACTION_TYPES, GameContext } from "@/lib/game-context";
+import { sleep } from "@/lib/utils";
+import ReactAudioPlayer from "react-audio-player";
 
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const classNames = require("classnames");
 
 export default function Box(props) {
   const { dispatch, state } = useContext(GameContext);
@@ -12,6 +13,7 @@ export default function Box(props) {
   const identifier = categoryId + "" + questionId;
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [enteredAnswer, setEnteredAnswer] = useState("");
+  //const [answerStatus, setAnswerStatus] = useState("");
 
   async function changeToFullScreen(event) {
     if (!isFullScreen) {
@@ -26,7 +28,6 @@ export default function Box(props) {
       await sleep(1000);
       // 2. Hide the dollar value
       $(target).find("#value").fadeOut();
-
       // 3. Show the question + input
       await sleep(600);
       $(`#box-question_${identifier}`).fadeIn();
@@ -34,17 +35,16 @@ export default function Box(props) {
     }
   }
 
-  function handleInputChange(event) {
+  function handleAnswerInputChange(event) {
     setEnteredAnswer(event.target.value);
   }
 
-  function buttonHandler(event) {
-    let correctAnswer = false;
+  async function questionSubmitHandler(event) {
     event.preventDefault();
-    if (enteredAnswer.toLowerCase() == answer.toLowerCase()) {
-      correctAnswer = true;
-    }
+    const correctAnswer = enteredAnswer.toLowerCase() == answer.toLowerCase();
 
+    await sleep(1000);
+    // Update the Score
     dispatch({
       type: ACTION_TYPES.SET_SCORE,
       payload: {
@@ -52,17 +52,18 @@ export default function Box(props) {
       },
     });
 
+    // Subtract 1 from questions
     dispatch({
       type: ACTION_TYPES.SUBTRACT_QUESTION_COUNT,
     });
 
+    // Hide the question and input
     $(`#box-question_${identifier}`).hide();
     $(`#answer-form_${identifier}`).hide();
+
+    // Then we revert the box to it's original settings
     const target = $(event.target).closest(".main-value-box");
-    // revert the box
     $(target).toggleClass(styles.fullScreen);
-    /// We then have to revert, calculate the points, etc...
-    console.log(state.totalQuestions);
   }
 
   return (
@@ -74,19 +75,29 @@ export default function Box(props) {
       <p className={styles.boxQuestion} id={`box-question_${identifier}`}>
         {question}
       </p>
-      <form className={styles.answerForm} id={`answer-form_${identifier}`}>
+      <form
+        className={styles.answerForm}
+        id={`answer-form_${identifier}`}
+        onSubmit={questionSubmitHandler}
+      >
         <div className={styles.answerInputWrapper}>
           <input
             name="answer"
             className={styles.answerInput}
             value={enteredAnswer}
-            onChange={handleInputChange}
+            onChange={handleAnswerInputChange}
           ></input>
         </div>
-        <div className={styles.submitWrapper} onClick={buttonHandler}>
+        <div className={styles.submitWrapper}>
           <button>Submit</button>
         </div>
       </form>
+      <div
+        className={styles.answerStatusWrapper}
+        id={`answer-status-wrapper_${identifier}`}
+      >
+        <p>{}</p>
+      </div>
     </div>
   );
 }

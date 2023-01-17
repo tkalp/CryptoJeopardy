@@ -40,7 +40,7 @@ export default function Home() {
       <main className={styles.main}>
         <ReactAudioPlayer
           id="theme-music-player"
-          src="audio/Jeopardy-theme-song.mp3"
+          src="audio/jeopardy-theme-song.mp3"
           loop={true}
         />
         <div className={styles.contentWrapper}>
