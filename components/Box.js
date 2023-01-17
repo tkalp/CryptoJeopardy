@@ -10,10 +10,9 @@ const classNames = require("classnames");
 export default function Box(props) {
   const { dispatch, state } = useContext(GameContext);
   const { value, question, answer, categoryId, questionId } = props;
-  const identifier = categoryId + "" + questionId;
+  const componentId = categoryId + "" + questionId;
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [enteredAnswer, setEnteredAnswer] = useState("");
-  //const [answerStatus, setAnswerStatus] = useState("");
 
   async function changeToFullScreen(event) {
     if (!isFullScreen) {
@@ -30,8 +29,8 @@ export default function Box(props) {
       $(target).find("#value").fadeOut();
       // 3. Show the question + input
       await sleep(600);
-      $(`#box-question_${identifier}`).fadeIn();
-      $(`#answer-form_${identifier}`).fadeIn();
+      $(`#box-question_${componentId}`).fadeIn();
+      $(`#answer-form_${componentId}`).fadeIn();
     }
   }
 
@@ -41,9 +40,22 @@ export default function Box(props) {
 
   async function questionSubmitHandler(event) {
     event.preventDefault();
+    const answerInput = $(`#answer-form_${componentId}`).find("input")[0];
+    // If we add in a function to check merkle tree, it should be here
     const correctAnswer = enteredAnswer.toLowerCase() == answer.toLowerCase();
 
-    await sleep(1000);
+    if (correctAnswer) {
+      $("#correct-answer-sound")[0].play();
+      $(answerInput).addClass(styles.correctAnswer);
+      $(answerInput).removeClass(styles.wrongAnswer);
+    } else {
+      $("#wrong-answer-sound")[0].play();
+      $(answerInput).addClass(styles.wrongAnswer);
+      $(answerInput).addClass(styles.correctAnswer);
+    }
+
+    await sleep(1500);
+
     // Update the Score
     dispatch({
       type: ACTION_TYPES.SET_SCORE,
@@ -58,8 +70,8 @@ export default function Box(props) {
     });
 
     // Hide the question and input
-    $(`#box-question_${identifier}`).hide();
-    $(`#answer-form_${identifier}`).hide();
+    $(`#box-question_${componentId}`).hide();
+    $(`#answer-form_${componentId}`).hide();
 
     // Then we revert the box to it's original settings
     const target = $(event.target).closest(".main-value-box");
@@ -72,12 +84,12 @@ export default function Box(props) {
       className={classNames("main-value-box", styles.valueBox)}
     >
       <h1 id="value">{"$" + props.value}</h1>
-      <p className={styles.boxQuestion} id={`box-question_${identifier}`}>
+      <p className={styles.boxQuestion} id={`box-question_${componentId}`}>
         {question}
       </p>
       <form
         className={styles.answerForm}
-        id={`answer-form_${identifier}`}
+        id={`answer-form_${componentId}`}
         onSubmit={questionSubmitHandler}
       >
         <div className={styles.answerInputWrapper}>
@@ -92,12 +104,6 @@ export default function Box(props) {
           <button>Submit</button>
         </div>
       </form>
-      <div
-        className={styles.answerStatusWrapper}
-        id={`answer-status-wrapper_${identifier}`}
-      >
-        <p>{}</p>
-      </div>
     </div>
   );
 }
