@@ -5,10 +5,6 @@ import { getCategoriesAndQuestions } from "../lib/getJeopardyData";
 import { ACTION_TYPES, GameContext } from "@/lib/game-context";
 import ReactAudioPlayer from "react-audio-player";
 
-async function sleep(ms) {
-  await new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 export async function getServerSideProps(context) {
   // load questions on server
   const result = getCategoriesAndQuestions();
@@ -41,10 +37,12 @@ export default function Game(props) {
       {state.totalQuestions > 0 && (
         <main className={styles.main}>
           <ReactAudioPlayer
-            id="theme-music-player"
+            id="correct-answer-sound"
             src="audio/jeopardy-correct-answer.mp3"
-            loop={true}
-            controls
+          />
+          <ReactAudioPlayer
+            id="wrong-answer-sound"
+            src="audio/jeopardy-wrong-answer.mp3"
           />
           <div className={styles.columnsWrapper}>
             {categories.map((category, index) => {
