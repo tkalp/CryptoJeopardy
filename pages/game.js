@@ -11,7 +11,7 @@ export async function getServerSideProps(context) {
   return {
     props: {
       categories: result,
-    }, // will be passed to the page component as props
+    },
   };
 }
 
@@ -19,6 +19,7 @@ export default function Game(props) {
   const { dispatch, state } = useContext(GameContext);
   const score = state.score;
   const { categories } = props;
+
   const totalQuestions = categories.reduce((acc, category) => {
     return acc + category.Questions.length;
   }, 0);
@@ -44,6 +45,10 @@ export default function Game(props) {
             id="wrong-answer-sound"
             src="audio/jeopardy-wrong-answer.mp3"
           />
+          <ReactAudioPlayer
+            id="daily-double-sound"
+            src="audio/jeopardy-daily-double.mp3"
+          />
           <div className={styles.columnsWrapper}>
             {categories.map((category, index) => {
               return (
@@ -65,6 +70,7 @@ export default function Game(props) {
           </div>
         </main>
       )}
+      {/* We need to develop an end game screen or continue to next round */}
       {state.totalQuestions == 0 && <div>No Questions Left</div>}
     </div>
   );

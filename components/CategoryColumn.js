@@ -10,6 +10,8 @@ export default function CategoryColumn(props) {
         <h1>{category}</h1>
       </div>
       {questions.map((question, index) => {
+        let value = Math.random();
+
         return (
           <Box
             value={question.Value}
@@ -17,6 +19,7 @@ export default function CategoryColumn(props) {
             answer={question.Answer}
             categoryId={id}
             questionId={index}
+            dailyDouble={value > 0.9}
           />
         );
       })}

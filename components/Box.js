@@ -9,7 +9,9 @@ const classNames = require("classnames");
 
 export default function Box(props) {
   const { dispatch, state } = useContext(GameContext);
-  const { value, question, answer, categoryId, questionId } = props;
+  const { value, question, answer, categoryId, questionId, dailyDouble } =
+    props;
+
   const componentId = categoryId + "" + questionId;
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [enteredAnswer, setEnteredAnswer] = useState("");
@@ -17,14 +19,23 @@ export default function Box(props) {
   async function changeToFullScreen(event) {
     if (!isFullScreen) {
       setIsFullScreen(true);
+
       let target = event.target;
       // dont work with the h1
       if ($(target).is("h1")) {
         target = $(event.target).closest("div");
       }
       $(target).toggleClass(styles.fullScreen);
+      // If this question is a Daily Double
+      if (dailyDouble) {
+        $(target).find("#value").addClass(styles.dailyDouble);
+        $(target)
+          .find("#value")
+          .html("<span>Daily</span> <br/> <span>Double</span>");
+        $("#daily-double-sound")[0].play();
+      }
       // 1. Pause for 1s
-      await sleep(1000);
+      await sleep(2000);
       // 2. Hide the dollar value
       $(target).find("#value").fadeOut();
       // 3. Show the question + input
@@ -56,11 +67,12 @@ export default function Box(props) {
 
     await sleep(1500);
 
+    let addedScore = dailyDouble ? value * 2 : value;
     // Update the Score
     dispatch({
       type: ACTION_TYPES.SET_SCORE,
       payload: {
-        addedScore: correctAnswer ? value : -1 * value,
+        addedScore: correctAnswer ? addedScore : -1 * addedScore,
       },
     });
 
@@ -83,6 +95,7 @@ export default function Box(props) {
       onClick={changeToFullScreen}
       className={classNames("main-value-box", styles.valueBox)}
     >
+      {dailyDouble && <p>Daily Double</p>}
       <h1 id="value">{"$" + props.value}</h1>
       <p className={styles.boxQuestion} id={`box-question_${componentId}`}>
         {question}
