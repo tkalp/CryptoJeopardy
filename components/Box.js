@@ -3,7 +3,6 @@ import styles from "./Box.module.scss";
 import $ from "jquery";
 import { ACTION_TYPES, GameContext } from "@/lib/game-context";
 import { sleep } from "@/lib/utils";
-import ReactAudioPlayer from "react-audio-player";
 
 const classNames = require("classnames");
 
@@ -95,7 +94,7 @@ export default function Box(props) {
       onClick={changeToFullScreen}
       className={classNames("main-value-box", styles.valueBox)}
     >
-      {dailyDouble && <p>Daily Double</p>}
+      {/* {dailyDouble && <p>Daily Double</p>} */}
       <h1 id="value">{"$" + props.value}</h1>
       <p className={styles.boxQuestion} id={`box-question_${componentId}`}>
         {question}
