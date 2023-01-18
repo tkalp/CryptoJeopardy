@@ -20,6 +20,7 @@ export default function CategoryColumn(props) {
             categoryId={id}
             questionId={index}
             dailyDouble={value > 0.9}
+            key={index}
           />
         );
       })}

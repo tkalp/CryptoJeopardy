@@ -2,6 +2,7 @@ import CategoryColumn from "@/components/CategoryColumn";
 import styles from "@/styles/Game.module.scss";
 import { useContext, useState, useEffect } from "react";
 import { getCategoriesAndQuestions } from "../lib/getJeopardyData";
+import { createMerkleTreeFromJeopardyQuestions } from "@/lib/merkleTree";
 import { ACTION_TYPES, GameContext } from "@/lib/game-context";
 import ReactAudioPlayer from "react-audio-player";
 
@@ -10,7 +11,7 @@ export async function getServerSideProps(context) {
   const result = getCategoriesAndQuestions();
   return {
     props: {
-      categories: result,
+      data: result,
     },
   };
 }
@@ -18,13 +19,20 @@ export async function getServerSideProps(context) {
 export default function Game(props) {
   const { dispatch, state } = useContext(GameContext);
   const score = state.score;
-  const { categories } = props;
+  const { data } = props;
 
-  const totalQuestions = categories.reduce((acc, category) => {
+  const totalQuestions = data.reduce((acc, category) => {
     return acc + category.Questions.length;
   }, 0);
 
   useEffect(() => {
+    const merkleTree = createMerkleTreeFromJeopardyQuestions(data);
+    dispatch({
+      type: ACTION_TYPES.SET_MERKLE_TREE,
+      payload: {
+        merkleTree,
+      },
+    });
     dispatch({
       type: ACTION_TYPES.SET_QUESTION_COUNT,
       payload: {
@@ -50,7 +58,7 @@ export default function Game(props) {
             src="audio/jeopardy-daily-double.mp3"
           />
           <div className={styles.columnsWrapper}>
-            {categories.map((category, index) => {
+            {data.map((category, index) => {
               return (
                 <CategoryColumn
                   category={category.Name}

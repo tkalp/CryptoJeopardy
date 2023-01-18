@@ -3,6 +3,7 @@ import styles from "./Box.module.scss";
 import $ from "jquery";
 import { ACTION_TYPES, GameContext } from "@/lib/game-context";
 import { sleep } from "@/lib/utils";
+import { SHA256 } from "@/lib/hash";
 
 const classNames = require("classnames");
 
@@ -18,7 +19,6 @@ export default function Box(props) {
   async function changeToFullScreen(event) {
     if (!isFullScreen) {
       setIsFullScreen(true);
-
       let target = event.target;
       // dont work with the h1
       if ($(target).is("h1")) {
@@ -52,8 +52,13 @@ export default function Box(props) {
     event.preventDefault();
     const answerInput = $(`#answer-form_${componentId}`).find("input")[0];
     // If we add in a function to check merkle tree, it should be here
-    const correctAnswer = enteredAnswer.toLowerCase() == answer.toLowerCase();
+    const { merkleTree } = state;
+    const root = merkleTree.getRoot().toString("hex");
+    const leaf = SHA256((question + enteredAnswer).toLowerCase());
+    const proof = merkleTree.getProof(leaf);
+    const correctAnswer = merkleTree.verify(proof, leaf, root);
 
+    // const correctAnswer = enteredAnswer.toLowerCase() == answer.toLowerCase();
     if (correctAnswer) {
       $("#correct-answer-sound")[0].play();
       $(answerInput).addClass(styles.correctAnswer);
@@ -65,9 +70,10 @@ export default function Box(props) {
     }
 
     await sleep(1500);
+    // Calculate the score required to add or subtract
+    const addedScore = dailyDouble ? value * 2 : value;
 
-    let addedScore = dailyDouble ? value * 2 : value;
-    // Update the Score
+    //Update the Score
     dispatch({
       type: ACTION_TYPES.SET_SCORE,
       payload: {
@@ -75,7 +81,7 @@ export default function Box(props) {
       },
     });
 
-    // Subtract 1 from questions
+    //Subtract 1 from questions
     dispatch({
       type: ACTION_TYPES.SUBTRACT_QUESTION_COUNT,
     });
