@@ -4,6 +4,7 @@ import $ from "jquery";
 import { ACTION_TYPES, GameContext } from "@/lib/game-context";
 import { sleep } from "@/lib/utils";
 import { SHA256 } from "@/lib/hash";
+import Timer from "./Timer";
 
 const classNames = require("classnames");
 
@@ -16,6 +17,10 @@ export default function Box(props) {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [enteredAnswer, setEnteredAnswer] = useState("");
 
+  function timerExpireHandler() {
+    questionSubmitHandler();
+  }
+
   async function changeToFullScreen(event) {
     if (!isFullScreen) {
       setIsFullScreen(true);
@@ -25,7 +30,8 @@ export default function Box(props) {
         target = $(event.target).closest("div");
       }
       $(target).toggleClass(styles.fullScreen);
-      // If this question is a Daily Double
+
+      //If this question is a Daily Double
       if (dailyDouble) {
         $(target).find("#value").addClass(styles.dailyDouble);
         $(target)
@@ -39,8 +45,12 @@ export default function Box(props) {
       $(target).find("#value").fadeOut();
       // 3. Show the question + input
       await sleep(600);
+      $(target).find(".timer-container").fadeIn();
       $(`#box-question_${componentId}`).fadeIn();
       $(`#answer-form_${componentId}`).fadeIn();
+
+      const timerBtn = $(target).find(".timer-start-button")[0];
+      $(timerBtn).click();
     }
   }
 
@@ -49,7 +59,9 @@ export default function Box(props) {
   }
 
   async function questionSubmitHandler(event) {
-    event.preventDefault();
+    if (event != null) {
+      event.preventDefault();
+    }
     const answerInput = $(`#answer-form_${componentId}`).find("input")[0];
     // If we add in a function to check merkle tree, it should be here
     const { merkleTree } = state;
@@ -86,12 +98,13 @@ export default function Box(props) {
       type: ACTION_TYPES.SUBTRACT_QUESTION_COUNT,
     });
 
-    // Hide the question and input
+    // Hide the question, input, and timer
+    const target = $("." + styles.fullScreen);
     $(`#box-question_${componentId}`).hide();
     $(`#answer-form_${componentId}`).hide();
+    $(target).find(".timer-container").hide();
 
     // Then we revert the box to it's original settings
-    const target = $(event.target).closest(".main-value-box");
     $(target).toggleClass(styles.fullScreen);
   }
 
@@ -101,6 +114,7 @@ export default function Box(props) {
       className={classNames("main-value-box", styles.valueBox)}
     >
       {/* {dailyDouble && <p>Daily Double</p>} */}
+      <Timer secondsParam={15} timerExpireHandler={timerExpireHandler} />
       <h1 id="value">{"$" + props.value}</h1>
       <p className={styles.boxQuestion} id={`box-question_${componentId}`}>
         {question}

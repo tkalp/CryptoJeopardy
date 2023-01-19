@@ -18,6 +18,7 @@
     "react": "18.2.0",
     "react-audio-player": "^0.17.0",
     "react-dom": "18.2.0",
+    "react-timer-hook": "^3.0.5",
     "sass": "^1.57.1"
   }
 }

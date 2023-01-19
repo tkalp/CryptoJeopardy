@@ -1,0 +1,23 @@
+@import url('https://fonts.cdnfonts.com/css/itc-korinna-std');
+
+.timerContainer{
+    padding: 1rem;
+    margin-top: -5rem;
+    display: none;
+    align-self: flex-end;
+}
+
+.timerStartButton{
+    display: none;
+}
+
+.timerContent {
+    display: flex;
+    align-items: center;
+    
+    p {
+        margin: 0.3rem;
+        font-size: 2rem;
+        font-family: 'ITC_ Korinna', sans-serif;
+    }
+}
