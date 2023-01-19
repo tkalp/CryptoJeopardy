@@ -36,6 +36,11 @@ export default function Timer(props) {
         onClick={start}
         className={classNames("timer-start-button", styles.timerStartButton)}
       />
+
+      <button
+        onClick={pause}
+        className={classNames("timer-stop-button", styles.timerStartButton)}
+      />
     </div>
   );
 

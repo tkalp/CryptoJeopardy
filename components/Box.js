@@ -62,6 +62,13 @@ export default function Box(props) {
     if (event != null) {
       event.preventDefault();
     }
+    // This is the only thing with full screen
+    const target = $("." + styles.fullScreen);
+    // Stop the timer
+    const stopButton = $(target).find(".timer-stop-button")[0];
+    console.log(stopButton);
+    $(stopButton).click();
+
     const answerInput = $(`#answer-form_${componentId}`).find("input")[0];
     // If we add in a function to check merkle tree, it should be here
     const { merkleTree } = state;
@@ -99,7 +106,7 @@ export default function Box(props) {
     });
 
     // Hide the question, input, and timer
-    const target = $("." + styles.fullScreen);
+
     $(`#box-question_${componentId}`).hide();
     $(`#answer-form_${componentId}`).hide();
     $(target).find(".timer-container").hide();
