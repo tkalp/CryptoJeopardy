@@ -19,7 +19,7 @@ export async function getServerSideProps(context) {
 export default function Game(props) {
   const { dispatch, state } = useContext(GameContext);
   const score = state.score;
-  const { data } = props;
+  const { data } = props; // data is questions and categories
 
   const totalQuestions = data.reduce((acc, category) => {
     return acc + category.Questions.length;
@@ -41,6 +41,7 @@ export default function Game(props) {
     });
   }, [totalQuestions]);
 
+  // Put in a small header here where we have like 'restart', 'info', 'exit'
   return (
     <div className={styles.fullWrapper}>
       {state.totalQuestions > 0 && (
