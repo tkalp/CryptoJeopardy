@@ -16,6 +16,7 @@ export default function Clue(props) {
   const componentId = categoryId + "" + questionId;
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [enteredAnswer, setEnteredAnswer] = useState("");
+  const [showAnswer, setShowAnswer] = useState(false);
 
   function timerExpireHandler() {
     questionSubmitHandler();
@@ -48,23 +49,20 @@ export default function Clue(props) {
       // 3. Show the question + input
       await sleep(600);
       $(target).find(".timer-container").fadeIn();
-      const test = $(target).find(styles.clueContainer);
 
+      // Show the Clue Container
       $(target)
         .find("." + styles.clueContainer)
         .css("display", "flex")
         .hide()
         .fadeIn();
+
+      // Show the form container for the clue answer
       $(target)
         .find("." + styles.formContainer)
         .css("display", "flex")
         .hide()
         .fadeIn();
-      // $(`#box-question_${componentId}`).fadeIn();
-      // $(`#answer-form_${componentId}`).fadeIn();
-
-      //const timerBtn = $(target).find(".timer-start-button")[0];
-      //$(timerBtn).click();
     }
   }
 
@@ -80,7 +78,6 @@ export default function Clue(props) {
     const target = $("." + styles.fullScreen);
     // Stop the timer
     const stopButton = $(target).find(".timer-stop-button")[0];
-    console.log(stopButton);
     $(stopButton).click();
 
     const answerInput = $(`#answer-form_${componentId}`).find("input")[0];
@@ -102,7 +99,9 @@ export default function Clue(props) {
       $(answerInput).addClass(styles.correctAnswer);
     }
 
-    await sleep(1500);
+    // Show the answe with its hash
+    setShowAnswer(true);
+    await sleep(5000);
     // Calculate the score required to add or subtract
     const addedScore = dailyDouble ? value * 2 : value;
 
@@ -119,13 +118,19 @@ export default function Clue(props) {
       type: ACTION_TYPES.SUBTRACT_QUESTION_COUNT,
     });
 
-    // Hide the question, input, and timer
+    // Clue Container
+    $(target)
+      .find("." + styles.clueContainer)
+      .hide();
 
-    $(`#box-question_${componentId}`).hide();
-    $(`#answer-form_${componentId}`).hide();
+    // Form Container
+    $(target)
+      .find("." + styles.formContainer)
+      .hide();
     $(target).find(".timer-container").hide();
 
     // Then we revert the box to it's original settings
+    setShowAnswer(false);
     $(target).toggleClass(styles.fullScreen);
   }
 
@@ -158,11 +163,19 @@ export default function Clue(props) {
               onChange={handleAnswerInputChange}
             ></input>
           </div>
-          <div className={styles.submitWrapper}>
-            <button>Submit</button>
-          </div>
+          {!showAnswer && (
+            <div className={styles.submitWrapper}>
+              <button>Submit</button>
+            </div>
+          )}
         </form>
       </div>
+      {showAnswer && (
+        <div className={styles.answerContainer}>
+          <p>Answer is "{answer}"</p>
+          <p>SHA256(Clue + Answer) = {SHA256(question + answer)}</p>
+        </div>
+      )}
     </div>
   );
 }
