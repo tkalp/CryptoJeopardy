@@ -1,5 +1,5 @@
 import { useState, useContext } from "react";
-import styles from "./Box.module.scss";
+import styles from "./Clue.module.scss";
 import $ from "jquery";
 import { ACTION_TYPES, GameContext } from "@/lib/game-context";
 import { sleep } from "@/lib/utils";
@@ -8,7 +8,7 @@ import Timer from "./Timer";
 
 const classNames = require("classnames");
 
-export default function Box(props) {
+export default function Clue(props) {
   const { dispatch, state } = useContext(GameContext);
   const { value, question, answer, categoryId, questionId, dailyDouble } =
     props;
@@ -27,7 +27,7 @@ export default function Box(props) {
       let target = event.target;
       // dont work with the h1
       if ($(target).is("h1")) {
-        target = $(event.target).closest("div");
+        target = $(event.target).closest(".main-value-box");
       }
       $(target).toggleClass(styles.fullScreen);
 
@@ -38,6 +38,8 @@ export default function Box(props) {
           .find("#value")
           .html("<span>Daily</span> <br/> <span>Double</span>");
         $("#daily-double-sound")[0].play();
+      } else {
+        $("#clue-select-sound")[0].play();
       }
       // 1. Pause for 1s
       await sleep(2000);
@@ -46,11 +48,23 @@ export default function Box(props) {
       // 3. Show the question + input
       await sleep(600);
       $(target).find(".timer-container").fadeIn();
-      $(`#box-question_${componentId}`).fadeIn();
-      $(`#answer-form_${componentId}`).fadeIn();
+      const test = $(target).find(styles.clueContainer);
 
-      const timerBtn = $(target).find(".timer-start-button")[0];
-      $(timerBtn).click();
+      $(target)
+        .find("." + styles.clueContainer)
+        .css("display", "flex")
+        .hide()
+        .fadeIn();
+      $(target)
+        .find("." + styles.formContainer)
+        .css("display", "flex")
+        .hide()
+        .fadeIn();
+      // $(`#box-question_${componentId}`).fadeIn();
+      // $(`#answer-form_${componentId}`).fadeIn();
+
+      //const timerBtn = $(target).find(".timer-start-button")[0];
+      //$(timerBtn).click();
     }
   }
 
@@ -122,27 +136,33 @@ export default function Box(props) {
     >
       {/* {dailyDouble && <p>Daily Double</p>} */}
       <Timer secondsParam={15} timerExpireHandler={timerExpireHandler} />
-      <h1 id="value">{"$" + props.value}</h1>
-      <p className={styles.boxQuestion} id={`box-question_${componentId}`}>
-        {question}
-      </p>
-      <form
-        className={styles.answerForm}
-        id={`answer-form_${componentId}`}
-        onSubmit={questionSubmitHandler}
-      >
-        <div className={styles.answerInputWrapper}>
-          <input
-            name="answer"
-            className={styles.answerInput}
-            value={enteredAnswer}
-            onChange={handleAnswerInputChange}
-          ></input>
-        </div>
-        <div className={styles.submitWrapper}>
-          <button>Submit</button>
-        </div>
-      </form>
+      <div>
+        <h1 id="value">{"$" + props.value}</h1>
+      </div>
+      <div className={styles.clueContainer}>
+        <p className={styles.clue} id={`box-question_${componentId}`}>
+          {question}
+        </p>
+      </div>
+      <div className={styles.formContainer}>
+        <form
+          className={styles.answerForm}
+          id={`answer-form_${componentId}`}
+          onSubmit={questionSubmitHandler}
+        >
+          <div className={styles.answerInputWrapper}>
+            <input
+              name="answer"
+              className={styles.answerInput}
+              value={enteredAnswer}
+              onChange={handleAnswerInputChange}
+            ></input>
+          </div>
+          <div className={styles.submitWrapper}>
+            <button>Submit</button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 }

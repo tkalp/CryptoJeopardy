@@ -58,6 +58,10 @@ export default function Game(props) {
             id="daily-double-sound"
             src="audio/jeopardy-daily-double.mp3"
           />
+          <ReactAudioPlayer
+            id="clue-select-sound"
+            src="audio/jeopardy-select-clue.mp3"
+          />
           <div className={styles.columnsWrapper}>
             {data.map((category, index) => {
               return (

@@ -1,6 +1,6 @@
 import styles from "./CategoryColumn.module.scss";
 import $ from "jquery";
-import Box from "./Box";
+import Clue from "./Clue";
 
 export default function CategoryColumn(props) {
   const { id, category, questions } = props;
@@ -13,7 +13,7 @@ export default function CategoryColumn(props) {
         let value = Math.random();
 
         return (
-          <Box
+          <Clue
             value={question.Value}
             question={question.Question}
             answer={question.Answer}
