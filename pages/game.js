@@ -62,6 +62,7 @@ export default function Game(props) {
             id="clue-select-sound"
             src="audio/jeopardy-select-clue.mp3"
           />
+          <div className={styles.gameNavigation}></div>
           <div className={styles.columnsWrapper}>
             {data.map((category, index) => {
               return (
