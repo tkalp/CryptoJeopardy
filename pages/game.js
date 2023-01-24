@@ -5,6 +5,8 @@ import { getCategoriesAndQuestions } from "../lib/getJeopardyData";
 import { createMerkleTreeFromJeopardyQuestions } from "@/lib/merkleTree";
 import { ACTION_TYPES, GameContext } from "@/lib/game-context";
 import ReactAudioPlayer from "react-audio-player";
+import Image from "next/image";
+import MerkleTree from "@/components/MerkleTree";
 
 export async function getServerSideProps(context) {
   // load questions on server
@@ -18,6 +20,10 @@ export async function getServerSideProps(context) {
 
 export default function Game(props) {
   const { dispatch, state } = useContext(GameContext);
+  const { merkleTree } = state;
+  if (merkleTree != null) {
+    console.log(merkleTree.getLayersAsObject());
+  }
   const score = state.score;
   const { data } = props; // data is questions and categories
 
@@ -62,8 +68,18 @@ export default function Game(props) {
             id="clue-select-sound"
             src="audio/jeopardy-select-clue.mp3"
           />
-          <div className={styles.gameNavigation}></div>
-          <div className={styles.columnsWrapper}>
+          <div className={styles.gameNavigation}>
+            <div className={styles.treeIconContainer}>
+              <Image src="/img/merkle.png" width={35} height={35} />
+            </div>
+            <div className={styles.treeIconContainer}>
+              <Image src="/img/merkle.png" width={35} height={35} />
+            </div>
+            <div className={styles.treeIconContainer}>
+              <Image src="/img/merkle.png" width={35} height={35} />
+            </div>
+          </div>
+          {/* <div className={styles.columnsWrapper}>
             {data.map((category, index) => {
               return (
                 <CategoryColumn
@@ -81,6 +97,9 @@ export default function Game(props) {
             <h1 className={styles.questionCounter}>
               Questions Left: {state.totalQuestions}
             </h1>
+          </div> */}
+          <div className={styles.merkleTreeContainer}>
+            {merkleTree && <MerkleTree tree={merkleTree} />}
           </div>
         </main>
       )}
