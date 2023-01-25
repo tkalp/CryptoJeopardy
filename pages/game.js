@@ -21,11 +21,10 @@ export async function getServerSideProps(context) {
 export default function Game(props) {
   const { dispatch, state } = useContext(GameContext);
   const { merkleTree } = state;
-  if (merkleTree != null) {
-    console.log(merkleTree.getLayersAsObject());
-  }
+  // Keep track of score
   const score = state.score;
   const { data } = props; // data is questions and categories
+  const [showInfoScreen, setShowInfoScreen] = useState(false);
 
   const totalQuestions = data.reduce((acc, category) => {
     return acc + category.Questions.length;
@@ -46,6 +45,14 @@ export default function Game(props) {
       },
     });
   }, [totalQuestions]);
+
+  const infoButtonHandler = () => {
+    setShowInfoScreen(true);
+  };
+
+  const exitInformationHandler = () => {
+    setShowInfoScreen(false);
+  };
 
   // Put in a small header here where we have like 'restart', 'info', 'exit'
   return (
@@ -69,17 +76,26 @@ export default function Game(props) {
             src="audio/jeopardy-select-clue.mp3"
           />
           <div className={styles.gameNavigation}>
-            <div className={styles.treeIconContainer}>
-              <Image src="/img/merkle.png" width={35} height={35} />
+            <div className={styles.navItemsContainer}>
+              <button
+                className={styles.navItemContainer}
+                onClick={infoButtonHandler}
+              >
+                <Image src="/img/information.png" width={35} height={35} />
+              </button>
+              <button
+                className={styles.navItemContainer}
+                onClick={infoButtonHandler}
+              >
+                <Image src="/img/volume-off-white.png" width={35} height={35} />
+              </button>
             </div>
-            <div className={styles.treeIconContainer}>
-              <Image src="/img/merkle.png" width={35} height={35} />
-            </div>
-            <div className={styles.treeIconContainer}>
-              <Image src="/img/merkle.png" width={35} height={35} />
+
+            <div className={styles.navHeader}>
+              <p>Crypto Jeopardy</p>
             </div>
           </div>
-          {/* <div className={styles.columnsWrapper}>
+          <div className={styles.columnsWrapper}>
             {data.map((category, index) => {
               return (
                 <CategoryColumn
@@ -97,10 +113,49 @@ export default function Game(props) {
             <h1 className={styles.questionCounter}>
               Questions Left: {state.totalQuestions}
             </h1>
-          </div> */}
-          <div className={styles.merkleTreeContainer}>
-            {merkleTree && <MerkleTree tree={merkleTree} />}
           </div>
+          {/* <div className={styles.merkleTreeContainer}>
+            {merkleTree && <MerkleTree tree={merkleTree} />}
+          </div> */}
+          {showInfoScreen && (
+            <div className={styles.informationContainer}>
+              <div>
+                <button onClick={exitInformationHandler}>Exit</button>
+              </div>
+              <div className={styles.informationHeader}>
+                <h1>Welcome to Crypto Jeopardy!</h1>
+                <h3>How to Play</h3>
+              </div>
+              <ol className={styles.informationRules}>
+                <li>
+                  The game board is split into 25 questions across 5 randomly
+                  selected categories.
+                </li>
+                <li>
+                  Once a clue is a selected, the player will have 15 seconds to
+                  answer the question.
+                </li>
+                <li>Answers must end in a '?' to signify a question.</li>
+                <li>
+                  If the player does not answer within the timeframe, the answer
+                  will be marked as incorrect.
+                </li>
+                <li>
+                  Correct Answers will add the clue's selected score to the
+                  user's score.
+                </li>
+                <li>
+                  Incorrect Answeres will deduct points from the player's score.
+                </li>
+                <li>
+                  Answers are validated using Merkle Trees so you must be
+                  precise!
+                </li>
+                <li>Watch out for Daily Doubles, they're worth double!</li>
+                <li>Good Luck and Have Fun!</li>
+              </ol>
+            </div>
+          )}
         </main>
       )}
       {/* We need to develop an end game screen or continue to next round */}
