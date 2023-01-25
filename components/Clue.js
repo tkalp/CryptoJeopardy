@@ -42,6 +42,7 @@ export default function Clue(props) {
       } else {
         $("#clue-select-sound")[0].play();
       }
+
       // 1. Pause for 1s
       await sleep(2000);
       // 2. Hide the dollar value
@@ -50,6 +51,8 @@ export default function Clue(props) {
       await sleep(600);
       $(target).find(".timer-container").fadeIn();
 
+      const startButton = $(target).find(".timer-start-button");
+      $(startButton).click();
       // Show the Clue Container
       $(target)
         .find("." + styles.clueContainer)
