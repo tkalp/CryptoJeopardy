@@ -142,7 +142,6 @@ export default function Clue(props) {
       onClick={changeToFullScreen}
       className={classNames("main-value-box", styles.valueBox)}
     >
-      {/* {dailyDouble && <p>Daily Double</p>} */}
       <Timer secondsParam={15} timerExpireHandler={timerExpireHandler} />
       <div>
         <h1 id="value">{"$" + props.value}</h1>
@@ -175,8 +174,12 @@ export default function Clue(props) {
       </div>
       {showAnswer && (
         <div className={styles.answerContainer}>
-          <p>Answer is "{answer}"</p>
-          <p>SHA256(Clue + Answer) = {SHA256(question + answer)}</p>
+          <p>
+            Answer: <b>{answer.toLowerCase()}</b>
+          </p>
+          <p>
+            SHA256(Clue + Answer) = {SHA256(question + answer.toLowerCase())}
+          </p>
         </div>
       )}
     </div>
