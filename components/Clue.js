@@ -178,7 +178,8 @@ export default function Clue(props) {
             Answer: <b>{answer.toLowerCase()}</b>
           </p>
           <p>
-            SHA256(Clue + Answer) = {SHA256(question + answer.toLowerCase())}
+            SHA256(Clue + Answer) ={" "}
+            {SHA256(question.toLowerCase() + answer.toLowerCase())}
           </p>
         </div>
       )}

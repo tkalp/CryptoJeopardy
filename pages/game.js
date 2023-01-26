@@ -2,12 +2,13 @@ import CategoryColumn from "@/components/CategoryColumn";
 import styles from "@/styles/Game.module.scss";
 import { useContext, useState, useEffect } from "react";
 import { getCategoriesAndQuestions } from "../lib/getJeopardyData";
-import { createMerkleTreeFromJeopardyQuestions } from "@/lib/merkleTree";
+import { generateJeopardyMerkleTree } from "@/lib/merkleTree";
 import { ACTION_TYPES, GameContext } from "@/lib/game-context";
 import ReactAudioPlayer from "react-audio-player";
 import Image from "next/image";
 import MerkleTree from "@/components/MerkleTree";
 import InfoScreen from "@/components/InfoScreen";
+
 export async function getServerSideProps(context) {
   // load questions on server
   const result = getCategoriesAndQuestions();
@@ -23,15 +24,16 @@ export default function Game(props) {
   const { merkleTree } = state;
   // Keep track of score
   const score = state.score;
-  const { data } = props; // data is questions and categories
+  const clues = props.data; // data is questions and categories
   const [showInfoScreen, setShowInfoScreen] = useState(false);
 
-  const totalQuestions = data.reduce((acc, category) => {
+  const totalQuestions = clues.reduce((acc, category) => {
     return acc + category.Questions.length;
   }, 0);
 
   useEffect(() => {
-    const merkleTree = createMerkleTreeFromJeopardyQuestions(data);
+    const merkleTree = generateJeopardyMerkleTree(clues);
+    console.log(merkleTree.toString());
     dispatch({
       type: ACTION_TYPES.SET_MERKLE_TREE,
       payload: {
@@ -96,7 +98,7 @@ export default function Game(props) {
             </div>
           </div>
           <div className={styles.columnsWrapper}>
-            {data.map((category, index) => {
+            {clues.map((category, index) => {
               return (
                 <CategoryColumn
                   category={category.Name}
