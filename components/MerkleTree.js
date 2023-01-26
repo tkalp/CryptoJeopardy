@@ -1,48 +1,99 @@
-import { useEffect } from "react";
-import $ from "jquery";
+import styles from "./MerkleTree.module.scss";
 
 export default function MerkleTree(props) {
   const { tree } = props;
-  //
 
-  // useEffect(() => {
-  //   const layerCount = 1;
-  //   const layers = $(".layer-container");
-  //   const layersObject = tree.getLayersAsObject();
-  //   //console.log(layersObject);
-  //   const root = Object.keys(layersObject)[0];
-  //   console.log(root);
-  //   const test = $(`#layer-${layerCount}`);
-  //   console.log(test);
-  //   $(test).css("color", "green");
-  //   $(test);
-  // }, [tree]);
-
-  // const goDownNode = (nodeTree, node, layer) => {
-  //   console.log("Layer " + layer);
-
-  //   const nodeBranches = nodeTree[node];
-  //   if (nodeBranches != null) {
-  //     const nodes = Object.keys(nodeBranches);
-  //     const leftNode = nodes[0];
-  //     const rightNode = nodes[1];
-
-  //     goDownNode(nodeBranches, leftNode, layer + 1);
-  //     goDownNode(nodeBranches, nodes[1], layer + 1);
-  //   }
-  // };
-
+  const createMerkleDict = (tree) => {
+    const layers = tree.getLayers();
+    const layerCount = layers.length;
+    // Go through each layer
+    const merkleDict = {};
+    for (let i = 1; i <= layerCount; i++) {
+      console.log(`Layer ${i}:`);
+      let layer = layers[i - 1];
+      let elementCount = layer.length;
+      console.log(elementCount);
+      // Go through each node in the layer
+      const hexNodes = [];
+      for (let j = 0; j < elementCount; j++) {
+        let node = layer[j];
+        const hexValue = node.reduce((acc, value) => {
+          return acc + value.toString(16).padStart(2, "0");
+        }, "");
+        hexNodes.push(hexValue);
+      }
+      merkleDict[`Layer_${i}`] = hexNodes;
+    }
+    return merkleDict;
+  };
   // Keep working on this...it is possible...I will do it.
   // Visualization of the merkle tree
   const merkleSkeleton = (tree) => {
-    console.log(tree.toString());
-    // 1. Get Count of Layers in Tree
+    const treeObject = createMerkleDict(tree);
+    const layers = Object.keys(treeObject);
+    const divs = [];
+    for (const layer of layers) {
+      const layerElements = [];
+      const nodes = treeObject[layer];
+      for (const node of nodes) {
+        layerElements.push(<p id={node}>{node}</p>);
+      }
+      const layerElement = (
+        <div className={styles.layerContainer}>
+          <p className={styles.layerName}>{layer}</p>
+          <div className={styles.nodeContainer}>{layerElements}</div>
+        </div>
+      );
+      divs.push(layerElement);
+    }
+    return divs;
   };
-  // console.log(tree.toString());
-  //
-  //console.log(tree.toString());
-  //console.log({ treeStructure });
-  //console.log(tree.print());
-  //lookAtTree(treeStructure, "1");
-  return <div>{merkleSkeleton(tree)}</div>;
+
+  //return <div>{merkleSkeleton(tree)}</div>;
+  // todo, recreate this tree, layers have to be inside layers, its fuckeed
+  return (
+    <div class={styles.tree}>
+      <ul>
+        <li>
+          <a href="#">1</a>
+          <ul>
+            <li>
+              <a href="#">2</a>
+              <ul>
+                <li>
+                  <a href="#">2.1</a>
+                </li>
+                <li>
+                  <a href="#">2.2</a>
+                </li>
+                <li>
+                  <a href="#">2.3</a>
+                </li>
+                <li>
+                  <a href="#">2.3</a>
+                </li>
+              </ul>
+            </li>
+            <li>
+              <a href="#">2</a>
+              <ul>
+                <li>
+                  <a href="#">2.1</a>
+                </li>
+                <li>
+                  <a href="#">2.2</a>
+                </li>
+                <li>
+                  <a href="#">2.3</a>
+                </li>
+                <li>
+                  <a href="#">2.3</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+  );
 }

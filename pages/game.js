@@ -77,7 +77,7 @@ export default function Game(props) {
             id="clue-select-sound"
             src="audio/jeopardy-select-clue.mp3"
           />
-          <div className={styles.gameNavigation}>
+          {/* <div className={styles.gameNavigation}>
             <div className={styles.navItemsContainer}>
               <button
                 className={styles.navItemContainer}
@@ -115,10 +115,10 @@ export default function Game(props) {
             <h1 className={styles.questionCounter}>
               Questions Left: {state.totalQuestions}
             </h1>
-          </div>
-          {/* <div className={styles.merkleTreeContainer}>
-            {merkleTree && <MerkleTree tree={merkleTree} />}
           </div> */}
+          <div className={styles.merkleTreeContainer}>
+            {merkleTree && <MerkleTree tree={merkleTree} />}
+          </div>
           {showInfoScreen && (
             <InfoScreen exitInformationHandler={exitInformationHandler} />
           )}
