@@ -9,3 +9,38 @@ body {
 }
 
 /* //background: #060CE9; */
+
+.node circle {
+	fill: rgb(247, 106, 214);
+	stroke: rgb(184, 37, 81);
+	stroke-width: 1.5px;
+}
+
+.node text {
+	font-size: 16px;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	background-color: black;
+	fill: black;
+}
+
+.node {
+	cursor: pointer;
+}
+
+path.link {
+	fill: none;
+	stroke: #2593B8;
+	stroke-width: 1.5px;
+}
+
+body {
+	background-color: white;
+	overflow: hidden;
+}
+
+span {
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	color: #F4F4F4;
+	text-shadow: 0 1px 4px black;
+	float: right;
+}

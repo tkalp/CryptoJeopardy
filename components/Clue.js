@@ -89,6 +89,15 @@ export default function Clue(props) {
     const root = merkleTree.getRoot().toString("hex");
     const leaf = SHA256((question + enteredAnswer).toLowerCase());
     const proof = merkleTree.getProof(leaf);
+    console.log(leaf);
+    for (const element of proof) {
+      const data = element.data;
+      const hexValue = data.reduce((acc, value) => {
+        return acc + value.toString(16).padStart(2, "0");
+      }, "");
+      console.log(element);
+      console.log(hexValue);
+    }
     const correctAnswer = merkleTree.verify(proof, leaf, root);
 
     // const correctAnswer = enteredAnswer.toLowerCase() == answer.toLowerCase();

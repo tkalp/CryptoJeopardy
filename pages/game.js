@@ -26,6 +26,7 @@ export default function Game(props) {
   const score = state.score;
   const clues = props.data; // data is questions and categories
   const [showInfoScreen, setShowInfoScreen] = useState(false);
+  const [showMerkleTree, setShowMerkleTree] = useState(false);
 
   const totalQuestions = clues.reduce((acc, category) => {
     return acc + category.Questions.length;
@@ -56,6 +57,14 @@ export default function Game(props) {
     setShowInfoScreen(false);
   };
 
+  const treeButtonHandler = () => {
+    setShowMerkleTree(true);
+  };
+
+  const exitMerkleHandler = () => {
+    setShowMerkleTree(false);
+  };
+
   // Put in a small header here where we have like 'restart', 'info', 'exit'
   return (
     <div className={styles.fullWrapper}>
@@ -77,7 +86,7 @@ export default function Game(props) {
             id="clue-select-sound"
             src="audio/jeopardy-select-clue.mp3"
           />
-          {/* <div className={styles.gameNavigation}>
+          <div className={styles.gameNavigation}>
             <div className={styles.navItemsContainer}>
               <button
                 className={styles.navItemContainer}
@@ -90,6 +99,12 @@ export default function Game(props) {
                 onClick={infoButtonHandler}
               >
                 <Image src="/img/volume-off-white.png" width={35} height={35} />
+              </button>
+              <button
+                className={styles.navItemContainer}
+                onClick={treeButtonHandler}
+              >
+                <Image src="/img/tree.png" width={35} height={35} />
               </button>
             </div>
 
@@ -115,10 +130,8 @@ export default function Game(props) {
             <h1 className={styles.questionCounter}>
               Questions Left: {state.totalQuestions}
             </h1>
-          </div> */}
-          <div className={styles.merkleTreeContainer}>
-            {merkleTree && <MerkleTree tree={merkleTree} />}
           </div>
+          {showMerkleTree && <MerkleTree tree={merkleTree} exitMerkleHandler ={exitMerkleHandler} />}
           {showInfoScreen && (
             <InfoScreen exitInformationHandler={exitInformationHandler} />
           )}
