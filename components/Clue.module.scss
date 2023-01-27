@@ -109,11 +109,12 @@
     font-family: 'Klein Condensed Trial', sans-serif !important;
     color: white !important;
     text-align: center;
-    text-shadow: none !important;
+    
 
     span {        
         &:nth-child(3){
-            background: -webkit-linear-gradient(#eee, rgb(244, 13, 13));
+            text-shadow: none !important;
+            background: -webkit-linear-gradient(#eee, rgb(244, 13, 13));          
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }

@@ -4,8 +4,8 @@ import { Tree } from "react-tree-graph";
 import { useEffect } from "react";
 import $ from "jquery";
 export default function MerkleTree(props) {
-  const { tree } = props;
-
+  const { tree, visibleNodes } = props;
+  
   const findMyShit = () => {
     console.log("my shit is found");
   };
@@ -32,20 +32,33 @@ export default function MerkleTree(props) {
     return merkleDict;
   };
 
+  /**
+   * @name merkleSkeleton
+   * @description Creates the Merkle Tree Diagram Skeleton based on the Merkle Tree that is
+   *              fed in.
+   * @param {} tree
+   * @returns JSX
+   *
+   * @author Teddy Kalp
+   */
   const merkleSkeleton = (tree) => {
     const treeObject = createMerkleDict(tree);
     let layers = Object.keys(treeObject);
     layers = layers.reverse();
     const divs = [];
+    let i = 0;
     for (const layer of layers) {
       const layerElements = [];
       const nodes = treeObject[layer];
       for (const node of nodes) {
         layerElements.push(
           <div className={styles.node} id={node}>
-            <p title={node}>{node}</p>
-            <div className={styles.leftLine}></div>
-            <div className={styles.rightLine}></div>
+            {i == 0 && (
+              <p title={"0x" + node} className={styles.show}>
+                0x{node}
+              </p>
+            )}
+            {i > 0 && <p title={"0x" + node}>0x{node}</p>}
           </div>
         );
       }
@@ -56,14 +69,19 @@ export default function MerkleTree(props) {
         </div>
       );
       divs.push(layerElement);
+      i = i + 1;
     }
     return divs;
   };
 
   useEffect(() => {
-    const test = $("." + styles.layerContainer);
-    console.log(test);
-  }, []);
+    for (let node of visibleNodes) {
+      console.log("#" + node);
+      $("#" + node)
+        .find("p")
+        .addClass(styles.show);
+    }
+  }, [visibleNodes]);
 
   return (
     <div className={styles.treeMainContainer}>

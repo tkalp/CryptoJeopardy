@@ -10,8 +10,15 @@ const classNames = require("classnames");
 
 export default function Clue(props) {
   const { dispatch, state } = useContext(GameContext);
-  const { value, question, answer, categoryId, questionId, dailyDouble } =
-    props;
+  const {
+    value,
+    question,
+    answer,
+    categoryId,
+    questionId,
+    dailyDouble,
+    setShown,
+  } = props;
 
   const componentId = categoryId + "" + questionId;
   const [isFullScreen, setIsFullScreen] = useState(false);
@@ -43,7 +50,7 @@ export default function Clue(props) {
         $("#clue-select-sound")[0].play();
       }
 
-      // 1. Pause for 1s
+      //1. Pause for 1s
       await sleep(2000);
       // 2. Hide the dollar value
       $(target).find("#value").fadeOut();
@@ -89,15 +96,21 @@ export default function Clue(props) {
     const root = merkleTree.getRoot().toString("hex");
     const leaf = SHA256((question + enteredAnswer).toLowerCase());
     const proof = merkleTree.getProof(leaf);
-    console.log(leaf);
-    for (const element of proof) {
+
+    //Get Real Values and send them back to Game Component
+    const realLeaf = SHA256(question.toLowerCase() + answer.toLowerCase());
+    const hexProofs = [];
+    const realProof = merkleTree.getProof(realLeaf);
+    for (const element of realProof) {
       const data = element.data;
       const hexValue = data.reduce((acc, value) => {
         return acc + value.toString(16).padStart(2, "0");
       }, "");
-      console.log(element);
-      console.log(hexValue);
+      hexProofs.push(hexValue);
     }
+    setShown(realLeaf, hexProofs);
+
+    // Verifying the correct answer
     const correctAnswer = merkleTree.verify(proof, leaf, root);
 
     // const correctAnswer = enteredAnswer.toLowerCase() == answer.toLowerCase();
@@ -143,6 +156,7 @@ export default function Clue(props) {
 
     // Then we revert the box to it's original settings
     setShowAnswer(false);
+
     $(target).toggleClass(styles.fullScreen);
   }
 
@@ -152,9 +166,7 @@ export default function Clue(props) {
       className={classNames("main-value-box", styles.valueBox)}
     >
       <Timer secondsParam={15} timerExpireHandler={timerExpireHandler} />
-      <div>
-        <h1 id="value">{"$" + props.value}</h1>
-      </div>
+      <h1 id="value">{"$" + props.value}</h1>
       <div className={styles.clueContainer}>
         <p className={styles.clue} id={`box-question_${componentId}`}>
           {question}

@@ -8,7 +8,7 @@ import ReactAudioPlayer from "react-audio-player";
 import Image from "next/image";
 import MerkleTree from "@/components/MerkleTree";
 import InfoScreen from "@/components/InfoScreen";
-
+import $ from "jquery";
 export async function getServerSideProps(context) {
   // load questions on server
   const result = getCategoriesAndQuestions();
@@ -27,6 +27,7 @@ export default function Game(props) {
   const clues = props.data; // data is questions and categories
   const [showInfoScreen, setShowInfoScreen] = useState(false);
   const [showMerkleTree, setShowMerkleTree] = useState(false);
+  const [visibleNodes, setVisibleNodes] = useState([]);
 
   const totalQuestions = clues.reduce((acc, category) => {
     return acc + category.Questions.length;
@@ -34,7 +35,6 @@ export default function Game(props) {
 
   useEffect(() => {
     const merkleTree = generateJeopardyMerkleTree(clues);
-    console.log(merkleTree.toString());
     dispatch({
       type: ACTION_TYPES.SET_MERKLE_TREE,
       payload: {
@@ -63,6 +63,15 @@ export default function Game(props) {
 
   const exitMerkleHandler = () => {
     setShowMerkleTree(false);
+  };
+
+  const setShown = (leaf, hexProofs) => {
+    // Set the visible node of the answer
+    hexProofs.push(leaf);
+    // Set the proof nodes to visible
+    setVisibleNodes([...visibleNodes, ...hexProofs]);
+
+    console.log(visibleNodes);
   };
 
   // Put in a small header here where we have like 'restart', 'info', 'exit'
@@ -120,6 +129,7 @@ export default function Game(props) {
                   id={category.ID}
                   questions={category.Questions}
                   key={index}
+                  setShown={setShown}
                 />
               );
             })}
@@ -131,7 +141,13 @@ export default function Game(props) {
               Questions Left: {state.totalQuestions}
             </h1>
           </div>
-          {showMerkleTree && <MerkleTree tree={merkleTree} exitMerkleHandler ={exitMerkleHandler} />}
+          {showMerkleTree && (
+            <MerkleTree
+              tree={merkleTree}
+              exitMerkleHandler={exitMerkleHandler}
+              visibleNodes={visibleNodes}
+            />
+          )}
           {showInfoScreen && (
             <InfoScreen exitInformationHandler={exitInformationHandler} />
           )}

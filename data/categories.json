@@ -2,35 +2,23 @@
     "Categories": [
         {
             "ID": 1,
-            "Name": "Terminology"
-        },
-        {
-            "ID": 2,
-            "Name": "Symmetric Key Encryption"
-        },
-        {
-            "ID": 3,
-            "Name": "Public Key Infrastructure"
-        },
-        {
-            "ID": 4,
-            "Name": "Block Cipers"
-        },
-        {
-            "ID": 5,
             "Name": "Hash Functions"
         },
         {
-            "ID": 6,
-            "Name": "Random Crypto Knowledge"
+            "ID": 2,
+            "Name": "Public Key Cryptography"
         },
         {
-            "ID": 7,
-            "Name": "Blockchain"
-        },
-        {
-            "ID": 8,
+            "ID": 3,
             "Name": "Key Exchanges"
+        },
+        {
+            "ID": 4,
+            "Name": "Symmetric Key Cryptography"
+        },
+        {
+            "ID": 5,
+            "Name": "Quantum Cryptography"
         }
     ]
 }

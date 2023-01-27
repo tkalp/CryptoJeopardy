@@ -2,34 +2,94 @@
     "Questions": [
         {
             "CategoryID": 1,
-            "Question": "An electronic document provided by Certifying Authorities that binds information that identifies the owner with a public key.",
-            "Answer": "What is a certificate?",
+            "Question": "The process of using a one-way mathematical algorithm against data to produce a numeric value that is representative of that data",
+            "Answer": "What is hashing?",
             "Value": 200
         },
         {
             "CategoryID": 1,
-            "Question": "Term for extracting information that has been encrypted.",
-            "Answer": "What is decryption?",
+            "Question": "This hashing algorithm has been considered to be insecure since 2008 due to cryptographic weakness",
+            "Answer": "What is MD5?",
+            "Value": 200
+        },
+        {
+            "CategoryID": 1,
+            "Question": "This fixed-size bit string represents a message or a data set and is the output of a cryptographic hash function. It serves as a digital \"fingerprint\" for the input.",
+            "Answer": "What is a hash digest?",
+            "Value": 200
+        },
+        {
+            "CategoryID": 1,
+            "Question": "This can occur when a hashing algorithm produces the same output for different inputs",
+            "Answer": "What is a hash collision?",
+            "Value": 200
+        },
+        {
+            "CategoryID": 1,
+            "Question": "Since 2012, this is currently considered one of the most secure hashing algorithms in this generation",
+            "Answer": "What is SHA3?",
+            "Value": 200
+        },
+        {
+            "CategoryID": 1,
+            "Question": "This value is typically easy-to-read and understand prior to being fed into a hash function",
+            "Answer": "What is a pre-image?",
             "Value": 400
         },
         {
             "CategoryID": 1,
-            "Question": "A string of bits that allows someone to encrypt or decrypt data.",
-            "Answer": "What is a key?",
+            "Question": "The family of hashing functions that have been published by NIST as a U.S. Federal Processing Standards",
+            "Answer": "What is SHA?",
+            "Value": 400
+        },
+        {
+            "CategoryID": 1,
+            "Question": "This type of hashing fuction uses a key that is known to both the sender and the receiver of the message",
+            "Answer": "What is a keyed hashed function?",
             "Value": 600
         },
         {
             "CategoryID": 1,
-            "Question": "A device or algorithm that generates a sequence of numbers that has no set pattern.",
-            "Answer": "What is a random number generator?",
+            "Question": "In this tree, every \"leaf\" is labelled with crytographic hash",
+            "Answer": "What is a Merkle tree?",
+            "Value": 400
+        },
+        {
+            "CategoryID": 1,
+            "Question": "This property of cryptographic hash functions ensures that it is computationally infeasible to find two distinct inputs that produce the same output.",
+            "Answer": "What is Hash Collision Resistance?",
+            "Value": 600
+        },
+        {
+            "CategoryID": 1,
+            "Question": "This property of cryptographic hash functions ensures that it is computationally infeasible to find any input that produces a specific output.",
+            "Answer": "What is Pre-image Resistance?",
+            "Value": 600
+        },
+        {
+            "CategoryID": 1,
+            "Question": "This behavior of a hash function ensures that a small change in the input should result in a significant change in the output.",
+            "Answer": "What is the Avalanche effect?",
+            "Value": 600
+        },
+        {
+            "CategoryID": 1,
+            "Question": "This technique converts a large input value into a smaller hash value by dividing it into several equal-size pieces and adding them together to produce the hash value.",
+            "Answer": "What is the folding method?",
             "Value": 800
         },
         {
             "CategoryID": 1,
-            "Question": "The original cipher that was developed to encrypt teletype traffic, patented in 1919.",
-            "Answer": "What is the Vernam Cipher?",
+            "Question": "This method of selecting a hash function at random from a family of hash functions with a certain mathematical property, such that the probability of a collision is small.",
+            "Answer": "What is Universal hashing?",
+            "Value": 800
+        },{
+            "CategoryID": 1,
+            "Question": "This data structure maps keys to values and uses a hash function to compute an index into an array of buckets, where each bucket is a linked list of key-value pairs.",
+            "Answer": "What is a Hash Table?",
             "Value": 1000
         },
+        
         {
             "CategoryID": 2,
             "Question": "An electronic document provided by Certifying Authorities that binds information that identifies the owner with a public key.",
