@@ -3,7 +3,7 @@ import $ from "jquery";
 import Clue from "./Clue";
 
 export default function CategoryColumn(props) {
-  const { id, category, questions, setShown } = props;
+  const { id, category, questions, setShown, setShowTreeHandler } = props;
   return (
     <div className={styles.category}>
       <div className={styles.categoryTitleWrapper}>
@@ -22,6 +22,7 @@ export default function CategoryColumn(props) {
             dailyDouble={value > 0.9}
             key={index}
             setShown={setShown}
+            setShowTreeHandler={setShowTreeHandler}
           />
         );
       })}

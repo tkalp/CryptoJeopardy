@@ -18,6 +18,7 @@ export default function Clue(props) {
     questionId,
     dailyDouble,
     setShown,
+    setShowTreeHandler,
   } = props;
 
   const componentId = categoryId + "" + questionId;
@@ -86,9 +87,11 @@ export default function Clue(props) {
     }
     // This is the only thing with full screen
     const target = $("." + styles.fullScreen);
-    // Stop the timer
+
+    // Stop and hide the timer
     const stopButton = $(target).find(".timer-stop-button")[0];
     $(stopButton).click();
+    $(target).find(".timer-container").hide();
 
     const answerInput = $(`#answer-form_${componentId}`).find("input")[0];
     // If we add in a function to check merkle tree, it should be here
@@ -142,23 +145,25 @@ export default function Clue(props) {
     dispatch({
       type: ACTION_TYPES.SUBTRACT_QUESTION_COUNT,
     });
+  }
 
-    // Clue Container
+  const showTreeAfterClue = () => {
+    const target = $("." + styles.fullScreen);
+
+    // Hide Clue Container
     $(target)
       .find("." + styles.clueContainer)
       .hide();
 
-    // Form Container
+    // Hide Form Container
     $(target)
       .find("." + styles.formContainer)
       .hide();
-    $(target).find(".timer-container").hide();
-
-    // Then we revert the box to it's original settings
-    setShowAnswer(false);
 
     $(target).toggleClass(styles.fullScreen);
-  }
+    setShowAnswer(false);
+    setShowTreeHandler();
+  };
 
   return (
     <div
@@ -202,6 +207,7 @@ export default function Clue(props) {
             SHA256(Clue + Answer) ={" "}
             {SHA256(question.toLowerCase() + answer.toLowerCase())}
           </p>
+          <button onClick={showTreeAfterClue}>Show Tree</button>
         </div>
       )}
     </div>

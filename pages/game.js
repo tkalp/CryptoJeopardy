@@ -63,6 +63,7 @@ export default function Game(props) {
 
   const exitMerkleHandler = () => {
     setShowMerkleTree(false);
+    setVisibleNodes([]);
   };
 
   const setShown = (leaf, hexProofs) => {
@@ -130,6 +131,7 @@ export default function Game(props) {
                   questions={category.Questions}
                   key={index}
                   setShown={setShown}
+                  setShowTreeHandler={treeButtonHandler}
                 />
               );
             })}
