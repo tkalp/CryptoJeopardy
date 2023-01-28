@@ -16,14 +16,14 @@ export default function Home() {
   const [musicIcon, setMusicIcon] = useState(volumeOffPath);
 
   function playTheMusic() {
-    const audioElement = $("#theme-music-player");
+    //const audioElement = $("#theme-music-player");
     if (!musicPlaying) {
-      audioElement[0].play();
+      $("#theme-music-player")[0].play();
       setMusicPlaying(true);
       setMusicIcon(volumeOnPath);
     } else {
-      console.log(audioElement);
-      audioElement[0].pause();
+      $("#theme-music-player")[0].pause();
+      //audioElement[0].pause();
       setMusicPlaying(false);
       setMusicIcon(volumeOffPath);
     }
@@ -38,10 +38,6 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        {/* <ReactAudioPlayer
-          id="theme-music-player"
-          src="audio/jeopardy-theme-song.mp3"
-        /> */}
         <ReactAudioPlayer
           id="theme-music-player"
           src="audio/jeopardy-theme-song.mp3"
