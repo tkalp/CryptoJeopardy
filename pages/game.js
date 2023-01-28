@@ -57,8 +57,8 @@ export default function Game(props) {
     setShowInfoScreen(false);
   };
 
-  const playThemeSong = () => {
-    $("#theme-song")[0].play();
+  const playThemeSong = async () => {
+    await $("#theme-song")[0].play();
   };
 
   const treeButtonHandler = () => {
