@@ -48,11 +48,16 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <ReactAudioPlayer
+        {/* <ReactAudioPlayer
           id="theme-music-player"
           src="audio/jeopardy-theme-song.mp3"
           loop={true}
-        />
+        /> */}
+        <audio controls src="/audio/jeopardy-theme-song.mp3">
+          Your browser does not support the
+          <code>audio</code> element.
+        </audio>
+
         <div className={styles.contentWrapper}>
           <button onClick={playTheMusic} className={styles.themeSongButton}>
             <Image src={musicIcon} width={35} height={35} />
