@@ -57,6 +57,10 @@ export default function Game(props) {
     setShowInfoScreen(false);
   };
 
+  const playThemeSong = () => {
+    $("#theme-song")[0].play();
+  };
+
   const treeButtonHandler = () => {
     setShowMerkleTree(true);
   };
@@ -96,6 +100,10 @@ export default function Game(props) {
             id="clue-select-sound"
             src="audio/jeopardy-select-clue.mp3"
           />
+          <ReactAudioPlayer
+            id="theme-song"
+            src="audio/jeopardy-theme-song.mp3"
+          />
           <div className={styles.gameNavigation}>
             <div className={styles.navItemsContainer}>
               <button
@@ -106,7 +114,7 @@ export default function Game(props) {
               </button>
               <button
                 className={styles.navItemContainer}
-                onClick={infoButtonHandler}
+                onClick={playThemeSong}
               >
                 <Image src="/img/volume-off-white.png" width={35} height={35} />
               </button>
