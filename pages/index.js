@@ -38,11 +38,13 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        <ReactAudioPlayer
+        {/* <ReactAudioPlayer
           id="theme-music-player"
           src="audio/jeopardy-theme-song.mp3"
-          loop={true}
-          controls
+        /> */}
+        <ReactAudioPlayer
+          id="theme-music-player"
+          src="audio/jeopardy-select-clue.mp3"
         />
         <div className={styles.contentWrapper}>
           <button onClick={playTheMusic} className={styles.themeSongButton}>
