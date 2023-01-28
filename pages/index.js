@@ -44,7 +44,7 @@ export default function Home() {
         /> */}
         <ReactAudioPlayer
           id="theme-music-player"
-          src="audio/jeopardy-select-clue.mp3"
+          src="audio/jeopardy-theme-song.mp3"
         />
         <div className={styles.contentWrapper}>
           <button onClick={playTheMusic} className={styles.themeSongButton}>
