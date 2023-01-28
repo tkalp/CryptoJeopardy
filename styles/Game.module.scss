@@ -57,13 +57,24 @@
     justify-content: space-around;
     align-items: center;
     
-
     h1 {
         margin: 0;
         padding: 0;
         color: white;
         font-size: 3.5rem;
         font-family: 'Gyparody Rg', sans-serif;
+
+        @media (max-width: 768px) {
+            font-size: 2.5rem;
+        }
+        
+        @media (max-width: 640px) {
+            font-size: 2rem;
+        }  
+    }
+
+    @media(max-width: 768px){
+        flex-direction: column;
     }
 }
 
