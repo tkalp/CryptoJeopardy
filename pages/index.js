@@ -42,6 +42,7 @@ export default function Home() {
           id="theme-music-player"
           src="audio/jeopardy-theme-song.mp3"
           loop={true}
+          controls
         />
         <div className={styles.contentWrapper}>
           <button onClick={playTheMusic} className={styles.themeSongButton}>
