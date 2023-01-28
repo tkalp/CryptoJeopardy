@@ -53,7 +53,7 @@ export default function Home(props) {
           src="audio/jeopardy-theme-song.mp3"
           loop={true}
         /> */}
-        <audio controls src="/audio/jeopardy-theme-song.mp3">
+        <audio controls src="audio/jeopardy-theme-song.mp3">
           Your browser does not support the
           <code>audio</code> element.
         </audio>
