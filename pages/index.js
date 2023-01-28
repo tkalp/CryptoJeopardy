@@ -3,18 +3,8 @@ import styles from "@/styles/Home.module.css";
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
-import ReactAudioPlayer from "react-audio-player";
+//import ReactAudioPlayer from "react-audio-player";
 import $ from "jquery";
-
-export async function getServerSideProps(context) {
-  // load questions on server
-  const result = "please work";
-  return {
-    props: {
-      data: result,
-    },
-  };
-}
 
 export default function Home(props) {
   const volumeOnPath = "/img/volume-up.png";
@@ -48,16 +38,6 @@ export default function Home(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className={styles.main}>
-        {/* <ReactAudioPlayer
-          id="theme-music-player"
-          src="audio/jeopardy-theme-song.mp3"
-          loop={true}
-        /> */}
-        <audio controls src="audio/jeopardy-theme-song.mp3">
-          Your browser does not support the
-          <code>audio</code> element.
-        </audio>
-
         <div className={styles.contentWrapper}>
           <button onClick={playTheMusic} className={styles.themeSongButton}>
             <Image src={musicIcon} width={35} height={35} />

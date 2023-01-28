@@ -1,13 +1,20 @@
 import styles from "./MerkleTree.module.scss";
-import classNames from "classnames";
 import { Tree } from "react-tree-graph";
 import { useEffect } from "react";
 import $ from "jquery";
+const classNames = require("classnames");
+import { useState } from "react";
+import MerkleTreeInfo from "./MerkleTreeInfo";
 export default function MerkleTree(props) {
+  const [showMerkleInfo, setShowMerkleInfo] = useState(false);
   const { tree, visibleNodes } = props;
-  
-  const findMyShit = () => {
-    console.log("my shit is found");
+
+  const infoButtonHandler = () => {
+    setShowMerkleInfo(true);
+  };
+
+  const exitMerkleInfoHandler = () => {
+    setShowMerkleInfo(false);
   };
 
   const createMerkleDict = (tree) => {
@@ -52,22 +59,26 @@ export default function MerkleTree(props) {
       const nodes = treeObject[layer];
       for (const node of nodes) {
         layerElements.push(
-          <div className={styles.node} id={node}>
-            {i == 0 && (
-              <p title={"0x" + node} className={styles.show}>
-                0x{node}
-              </p>
-            )}
-            {i > 0 && <p title={"0x" + node}>0x{node}</p>}
+          <div
+            className={
+              i == 0 ? classNames(styles.node, styles.root) : styles.node
+            }
+            id={node}
+          >
+            <p title={"0x" + node} className={i == 0 ? styles.show : ""}>
+              0x{node}
+            </p>
           </div>
         );
       }
+
       const layerElement = (
         <div className={styles.layerContainer}>
           <p className={styles.layerName}>{layer.replace("_", " ")}</p>
           <div className={styles.nodeContainer}>{layerElements}</div>
         </div>
       );
+
       divs.push(layerElement);
       i = i + 1;
     }
@@ -75,23 +86,39 @@ export default function MerkleTree(props) {
   };
 
   useEffect(() => {
+    console.log(visibleNodes);
     for (let node of visibleNodes) {
-      console.log("#" + node);
-      $("#" + node)
+      let nodeValue = node.Node;
+      console.log("#" + nodeValue);
+      $("#" + nodeValue)
         .find("p")
         .addClass(styles.show);
+
+      if (!node.isData) {
+        $("#" + nodeValue).addClass(styles.highlight);
+      } else {
+        $("#" + nodeValue).addClass(styles.highlightData);
+      }
     }
   }, [visibleNodes]);
 
   return (
     <div className={styles.treeMainContainer}>
-      <div>
-        <button onClick={props.exitMerkleHandler}>Exit</button>
+      <div className={styles.merkleNav}>
+        <div>
+          <button onClick={props.exitMerkleHandler}>Exit</button>
+        </div>
+        <div>
+          <button onClick={infoButtonHandler}>Information</button>
+        </div>
       </div>
       <div className={styles.treeTitleContainer}>
         <h1 className={styles.treeTitle}>Jeopardy Merkle Tree</h1>
       </div>
       {merkleSkeleton(tree)}
+      {showMerkleInfo && (
+        <MerkleTreeInfo exitMerkleInfoHandler={exitMerkleInfoHandler} />
+      )}
     </div>
   );
 }

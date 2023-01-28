@@ -8,7 +8,6 @@ import ReactAudioPlayer from "react-audio-player";
 import Image from "next/image";
 import MerkleTree from "@/components/MerkleTree";
 import InfoScreen from "@/components/InfoScreen";
-import $ from "jquery";
 
 export async function getServerSideProps(context) {
   // load questions on server
@@ -69,11 +68,23 @@ export default function Game(props) {
 
   const setShown = (leaf, hexProofs) => {
     // Set the visible node of the answer
-    hexProofs.push(leaf);
-    // Set the proof nodes to visible
-    setVisibleNodes([...visibleNodes, ...hexProofs]);
+    const result = [
+      {
+        isData: true,
+        Node: leaf,
+      },
+    ];
 
-    console.log(visibleNodes);
+    for (const proof of hexProofs) {
+      result.push({
+        isData: false,
+        Node: proof,
+      });
+    }
+
+    //hexProofs.push(leaf);
+    // Set the proof nodes to visible
+    setVisibleNodes([...visibleNodes, ...result]);
   };
 
   // Put in a small header here where we have like 'restart', 'info', 'exit'
@@ -112,7 +123,6 @@ export default function Game(props) {
                 <Image src="/img/tree.png" width={35} height={35} />
               </button>
             </div>
-
             <div className={styles.navHeader}>
               <p>Crypto Jeopardy</p>
             </div>

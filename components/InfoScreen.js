@@ -17,29 +17,24 @@ export default function InfoScreen(props) {
         <h3>How to Play</h3>
       </div>
       <ol className={styles.informationRules}>
+        <li>Get ready to test your knowledge and show off your smarts!</li>
         <li>
-          The game board is split into 25 questions across 5 randomly selected
-          categories.
+          Players will be presented with clues in the form of answers, and must
+          come up with the corresponding question.
         </li>
         <li>
-          Once a clue is a selected, the player will have 15 seconds to answer
-          the question.
-        </li>
-        <li>Answers must end in a '?' to signify a question.</li>
-        <li>
-          If the player does not answer within the timeframe, the answer will be
-          marked as incorrect.
+          Each clue is worth a certain amount of money, with the value
+          increasing as you move across the board.
         </li>
         <li>
-          Correct Answers will add the clue's selected score to the user's
-          score.
+          Players can choose to play it safe and go for the lower dollar clues,
+          or take a risk and go for the big bucks!
         </li>
-        <li>Incorrect Answeres will deduct points from the player's score.</li>
         <li>
-          Answers are validated using Merkle Trees so you must be precise!
+          Watch out for the Daily Doubles as those questions are worth Double!
         </li>
-        <li>Watch out for Daily Doubles, they're worth double!</li>
-        <li>Good Luck and Have Fun!</li>
+        <li>And remember, the Jeopardy! category is in the form of question</li>
+        <li>And most importantly, have fun!</li>
       </ol>
     </div>
   );

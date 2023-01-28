@@ -58,11 +58,19 @@
             .show {
                 visibility: visible !important;
             }
-
-            .activated {
-                background: lime;
-            }
         } 
+
+        .root {
+            border: 5px solid rgba(245, 20, 20, 0.772);
+        }
+
+        .highlight {
+            border: 5px solid rgba(245, 144, 20, 0.772);
+        }
+
+        .highlightData{
+            border: 5px solid rgba(29, 255, 4, 0.772);;
+        }
     }
 
     &:nth-child(3){       
