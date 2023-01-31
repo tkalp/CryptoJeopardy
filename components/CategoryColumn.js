@@ -2,6 +2,10 @@ import styles from "./CategoryColumn.module.scss";
 import $ from "jquery";
 import Clue from "./Clue";
 
+/**
+ * @description Renders the columns for the jeopardy game
+ * @param {JSON} props
+ */
 export default function CategoryColumn(props) {
   const { id, category, questions, setShownMerkleNodes, setShowTreeHandler } =
     props;
