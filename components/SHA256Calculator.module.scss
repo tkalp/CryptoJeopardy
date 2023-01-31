@@ -47,10 +47,30 @@
     }
 }
 
-.infoContainer {
-    text-align: center;
-    p {
+.selectContainer {
+    margin: 1rem;
+
+    label {
+        margin-right: 0.3rem;
         font-size: 1.1rem;
-        font-family: 'Korinna';
+    }
+
+    select {
+        font-size: 1.1rem;
+    }
+}
+
+.infoContainer {
+    width: 70%;
+    ul {
+        list-style: none;
+        width: 100%;
+        margin: auto;
+
+        li {
+            margin: 0.3rem;
+            font-family: 'Korinna';
+            font-size: 1.2rem;
+        }
     }
 }

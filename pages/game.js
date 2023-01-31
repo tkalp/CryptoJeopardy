@@ -69,7 +69,6 @@ export default function Game(props) {
 
   const exitMerkleHandler = () => {
     setShowMerkleTree(false);
-    setVisibleNodes([]);
   };
 
   const calculatorButtonHandler = () => {
@@ -80,7 +79,8 @@ export default function Game(props) {
     setShowCalculator(false);
   };
 
-  const setShown = (leaf, hexProofs) => {
+  const setShownMerkleNodes = (leaf, hexProofs) => {
+    // setVisibleNodes([]);
     // Set the visible node of the answer
     const result = [
       {
@@ -96,9 +96,7 @@ export default function Game(props) {
       });
     }
 
-    //hexProofs.push(leaf);
-    // Set the proof nodes to visible
-    setVisibleNodes([...visibleNodes, ...result]);
+    setVisibleNodes([...result]);
   };
 
   // Put in a small header here where we have like 'restart', 'info', 'exit'
@@ -155,7 +153,7 @@ export default function Game(props) {
                   id={category.ID}
                   questions={category.Questions}
                   key={index}
-                  setShown={setShown}
+                  setShownMerkleNodes={setShownMerkleNodes}
                   setShowTreeHandler={treeButtonHandler}
                 />
               );

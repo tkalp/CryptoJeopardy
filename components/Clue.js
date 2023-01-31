@@ -17,7 +17,7 @@ export default function Clue(props) {
     categoryId,
     questionId,
     dailyDouble,
-    setShown,
+    setShownMerkleNodes,
     setShowTreeHandler,
   } = props;
 
@@ -111,7 +111,8 @@ export default function Clue(props) {
       }, "");
       hexProofs.push(hexValue);
     }
-    setShown(realLeaf, hexProofs);
+
+    setShownMerkleNodes(realLeaf, hexProofs);
 
     // Verifying the correct answer
     const correctAnswer = merkleTree.verify(proof, leaf, root);
