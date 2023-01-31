@@ -6,17 +6,19 @@
     width: 100vw;
     top: 0;
     background: #050a8f;
+    overflow-y: scroll;
+    overflow-x: hidden;
 }
 
 .treeTitleContainer {
     display: flex;
     justify-content: center;
-    margin-bottom: 2rem;
+    margin-bottom: 0.5rem;
     padding: 1rem;
     h1 {
         margin: 0;
         padding: 0;
-        font-size: 4.5rem;
+        font-size: 4rem;
         font-family: 'Roboto Mono', monospace;
     }
 }
@@ -40,7 +42,7 @@
 
         .node{
             padding: 0;
-            width: 3.4%;
+            width: 3.3%;
             margin: 0.3rem;
             background: rgba(255, 255, 255, 0.8);
 
@@ -53,6 +55,7 @@
                 text-overflow: ellipsis;
                 font-family: 'Roboto Mono', monospace;
                 visibility: hidden;
+                font-size: 0.8rem;
             }
 
             .show {
@@ -77,8 +80,16 @@
         .node {
             width: 30%;
             text-align: center;
-        }
+        }       
     }
+
+    /** Breakpoints:
+  sm: min-width: 640px;
+  md: min-width: 768px;
+  lg: min-width: 1024px;
+  xl: min-width: 1280px;
+  2xl: min-width: 1536px;
+**/
 
     &:nth-child(4){       
         .node {
@@ -96,7 +107,7 @@
 
     &:nth-child(6){       
         .node {
-            width: 12.5%;
+            width: 11.5%;
             text-align: center;
         }
     }
