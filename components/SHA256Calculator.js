@@ -2,6 +2,7 @@ import { useState } from "react";
 import styles from "./SHA256Calculator.module.scss";
 import { SHA256 } from "@/lib/hash";
 import $ from "jquery";
+import Image from "next/image";
 
 export default function SHA256Calculator(props) {
   const [plaintext, setPlainText] = useState("");
@@ -32,7 +33,9 @@ export default function SHA256Calculator(props) {
 
   return (
     <div className={styles.mainContainer}>
-      <button onClick={props.exitScreenHandler}>Exit</button>
+      <button onClick={props.exitScreenHandler} className={styles.exitButton}>
+        <Image src="/img/back-arrow.png" height={30} width={30} />
+      </button>
       <div className={styles.content}>
         <div className={styles.headerContainer}>
           <h1>SHA256 Calculator</h1>

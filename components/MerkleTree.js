@@ -5,6 +5,8 @@ import $ from "jquery";
 const classNames = require("classnames");
 import { useState } from "react";
 import MerkleTreeInfo from "./MerkleTreeInfo";
+import Image from "next/image";
+
 export default function MerkleTree(props) {
   const [showMerkleInfo, setShowMerkleInfo] = useState(false);
   const { tree, visibleNodes } = props;
@@ -65,7 +67,10 @@ export default function MerkleTree(props) {
             }
             id={node}
           >
-            <p title={"0x" + node} className={i == 0 ? styles.show : ""}>
+            <p
+              title={i == 0 ? "0x" + node + " (root)" : "0x" + node}
+              className={i == 0 ? styles.show : ""}
+            >
               0x{node}
             </p>
           </div>
@@ -85,19 +90,29 @@ export default function MerkleTree(props) {
     return divs;
   };
 
+  /**
+   * @description The following occurs when the Merkle Tree is Loaded
+   * 1. For each visible node we want to show, add the `show` class
+   * 2. Label each visible with either a `proof` or `data` tag
+   * 3. Color the border based on `proof` or `background`
+   */
   useEffect(() => {
-    console.log(visibleNodes);
     for (let node of visibleNodes) {
-      let nodeValue = node.Node;
-      console.log("#" + nodeValue);
-      $("#" + nodeValue)
-        .find("p")
-        .addClass(styles.show);
+      const nodeValue = node.Node;
+      const nodeElement = $("#" + nodeValue).find("p");
+      $(nodeElement).addClass(styles.show);
+      const title = $(nodeElement).attr("title");
 
       if (!node.isData) {
         $("#" + nodeValue).addClass(styles.highlight);
+        if (!title.includes("(proof)")) {
+          $(nodeElement).attr("title", title + " (proof)");
+        }
       } else {
         $("#" + nodeValue).addClass(styles.highlightData);
+        if (!title.includes("(data)")) {
+          $(nodeElement).attr("title", title + " (data)");
+        }
       }
     }
   }, [visibleNodes]);
@@ -106,10 +121,20 @@ export default function MerkleTree(props) {
     <div className={styles.treeMainContainer}>
       <div className={styles.merkleNav}>
         <div>
-          <button onClick={props.exitMerkleHandler}>Exit</button>
+          <button
+            onClick={props.exitMerkleHandler}
+            className={styles.merkleNavButton}
+          >
+            <Image src="/img/back-arrow.png" height={30} width={30} />
+          </button>
         </div>
         <div>
-          <button onClick={infoButtonHandler}>Information</button>
+          <button
+            onClick={infoButtonHandler}
+            className={styles.merkleNavButton}
+          >
+            <Image src="/img/information.png" height={30} width={30} />
+          </button>
         </div>
       </div>
       <div className={styles.treeTitleContainer}>

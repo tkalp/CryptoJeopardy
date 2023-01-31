@@ -9,7 +9,7 @@ export default function InfoScreen(props) {
           className={styles.informationExitButton}
           onClick={props.exitInformationHandler}
         >
-          <Image src="/img/exit.png" height={30} width={30} />
+          <Image src="/img/back-arrow.png" height={30} width={30} />
         </button>
       </div>
       <div className={styles.informationHeader}>

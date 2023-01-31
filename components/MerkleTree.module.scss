@@ -108,3 +108,22 @@
         }
     }
 }
+
+.merkleNav {
+    display: flex;
+    align-items: center;
+
+    div {
+        margin: 0.2rem;
+    }
+}
+
+.merkleNavButton {
+    background: none;
+    outline: none;
+    border: none;
+
+    &:hover {
+        cursor: pointer;
+    }
+}

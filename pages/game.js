@@ -80,8 +80,6 @@ export default function Game(props) {
   };
 
   const setShownMerkleNodes = (leaf, hexProofs) => {
-    // setVisibleNodes([]);
-    // Set the visible node of the answer
     const result = [
       {
         isData: true,
