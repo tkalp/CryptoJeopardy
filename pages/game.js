@@ -25,9 +25,14 @@ export default function Game(props) {
   // Keep track of score
   const score = state.score;
   const clues = props.data; // data is questions and categories
+  // State for the Rules of the game
   const [showInfoScreen, setShowInfoScreen] = useState(false);
+  // State for the Merkle Tree screen
   const [showMerkleTree, setShowMerkleTree] = useState(false);
+  // State for the visible nodes of the Merkle Tree
   const [visibleNodes, setVisibleNodes] = useState([]);
+  // State for the SHA256 Calculator
+  const [showCalculator, setShowCalculator] = useState(false);
 
   const totalQuestions = clues.reduce((acc, category) => {
     return acc + category.Questions.length;
@@ -121,6 +126,12 @@ export default function Game(props) {
                 onClick={treeButtonHandler}
               >
                 <Image src="/img/tree.png" width={35} height={35} />
+              </button>
+              <button
+                className={styles.navItemContainer}
+                onClick={treeButtonHandler}
+              >
+                <Image src="/img/calculator.png" width={35} height={35} />
               </button>
             </div>
             <div className={styles.navHeader}>
