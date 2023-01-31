@@ -3,22 +3,6 @@
         {
             "ID": 1,
             "Name": "Hash Functions"
-        },
-        {
-            "ID": 2,
-            "Name": "Public Key Cryptography"
-        },
-        {
-            "ID": 3,
-            "Name": "Key Exchanges"
-        },
-        {
-            "ID": 4,
-            "Name": "Symmetric Key Cryptography"
-        },
-        {
-            "ID": 5,
-            "Name": "Quantum Cryptography"
         }
     ]
 }

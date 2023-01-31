@@ -8,6 +8,7 @@ import ReactAudioPlayer from "react-audio-player";
 import Image from "next/image";
 import MerkleTree from "@/components/MerkleTree";
 import InfoScreen from "@/components/InfoScreen";
+import SHA256Calculator from "@/components/SHA256Calculator";
 
 export async function getServerSideProps(context) {
   // load questions on server
@@ -71,6 +72,14 @@ export default function Game(props) {
     setVisibleNodes([]);
   };
 
+  const calculatorButtonHandler = () => {
+    setShowCalculator(true);
+  };
+
+  const exitSHA256Handler = () => {
+    setShowCalculator(false);
+  };
+
   const setShown = (leaf, hexProofs) => {
     // Set the visible node of the answer
     const result = [
@@ -129,7 +138,7 @@ export default function Game(props) {
               </button>
               <button
                 className={styles.navItemContainer}
-                onClick={treeButtonHandler}
+                onClick={calculatorButtonHandler}
               >
                 <Image src="/img/calculator.png" width={35} height={35} />
               </button>
@@ -168,6 +177,9 @@ export default function Game(props) {
           )}
           {showInfoScreen && (
             <InfoScreen exitInformationHandler={exitInformationHandler} />
+          )}
+          {showCalculator && (
+            <SHA256Calculator exitScreenHandler={exitSHA256Handler} />
           )}
         </main>
       )}

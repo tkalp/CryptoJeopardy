@@ -1,0 +1,56 @@
+.mainContainer {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    background: #050a8f;
+}
+
+.content{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.headerContainer {
+    border-bottom: 3px solid white;
+    margin-bottom: 5rem;
+    h1 {
+        margin: 0;
+        padding: 0;
+        font-family: 'ITC Korinna Std';
+        font-size: 3rem;
+    }
+}
+
+.plainTextContainer, .hashContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    margin-bottom: 5rem;
+    h1 {
+        margin: 0;
+        padding: 0;
+        font-size: 2.5rem;
+        font-family: 'Swis721 BT';
+    }
+
+    textarea {
+        width: 60%;
+        height: 10vh;
+        resize: none;
+        font-size: 1.5rem;
+    }
+}
+
+.infoContainer {
+    text-align: center;
+    p {
+        font-size: 1.1rem;
+        font-family: 'Korinna';
+    }
+}
