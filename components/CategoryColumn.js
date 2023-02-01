@@ -21,6 +21,7 @@ export default function CategoryColumn(props) {
           <Clue
             value={question.Value}
             question={question.Question}
+            source={question.Source}
             answer={question.Answer}
             categoryId={id}
             questionId={index}

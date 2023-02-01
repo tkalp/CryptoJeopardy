@@ -19,6 +19,7 @@ export default function Clue(props) {
     dailyDouble,
     setShownMerkleNodes,
     setShowTreeHandler,
+    source,
   } = props;
 
   const componentId = categoryId + "" + questionId;
@@ -209,9 +210,13 @@ export default function Clue(props) {
             Answer: <b>{answer.toLowerCase()}</b>
           </p>
           <p>
+            <b>Source:</b> {source}
+          </p>
+          <p>
             SHA256(Clue + Answer) ={" "}
             {SHA256(question.toLowerCase() + answer.toLowerCase())}
           </p>
+
           <div className={styles.btnContainer}>
             <button onClick={showTreeAfterClue}>Show Tree</button>
             <button onClick={changeViewToBoard}>Back to Board</button>
