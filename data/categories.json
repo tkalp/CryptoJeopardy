@@ -1,8 +1,1 @@
-{
-    "Categories": [
-        {
-            "ID": 1,
-            "Name": "Hash Functions"
-        }
-    ]
-}
+[{"ID":1,"Name":"Hashing Techniques"},{"ID":2,"Name":"Public-Key Cryptography"},{"ID":3,"Name":"Private-Key Cryptography"},{"ID":4,"Name":"Its Secret "},{"ID":5,"Name":"Encryption and Decryption"},{"ID":6,"Name":"Foundations of Blockchain"},{"ID":7,"Name":"Smart Contracts"},{"ID":8,"Name":"Digital Signatures"},{"ID":9,"Name":"Database or Blockchain?"},{"ID":10,"Name":"Alice and Bob"},{"ID":11,"Name":"Confidentiality"},{"ID":12,"Name":"Integrity"},{"ID":13,"Name":"Availability"}]
