@@ -19,21 +19,25 @@ export default function InfoScreen(props) {
       <ol className={styles.informationRules}>
         <li>Get ready to test your knowledge and show off your smarts!</li>
         <li>
-          Players will be presented with clues in the form of answers, and must
-          come up with the corresponding question.
+          Players will be presented with questions in the form of answers.
         </li>
+        <li>Correct answers must be in the form of a question.</li>
         <li>
-          Each clue is worth a certain amount of money, with the value
-          increasing as you move across the board.
+          Each clue is worth a certain amount of points, with values increasing
+          based on complexity.
         </li>
         <li>
           Players can choose to play it safe and go for the lower dollar clues,
-          or take a risk and go for the big bucks!
+          or take a risk and go for the big points!
         </li>
         <li>
-          Watch out for the Daily Doubles as those questions are worth Double!
+          Watch out for the Daily Doubles as those questions are worth twice the
+          amount!
         </li>
-        <li>And remember, the Jeopardy! category is in the form of question</li>
+        <li>
+          Keep in mind that for wrong answers, there will be a deduction of the
+          value chosen (including Daily Doubles).
+        </li>
         <li>And most importantly, have fun!</li>
       </ol>
     </div>

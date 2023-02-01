@@ -35,6 +35,8 @@ export default function Game(props) {
   // State for the SHA256 Calculator
   const [showCalculator, setShowCalculator] = useState(false);
 
+  const [seed, setSeed] = useState(0);
+
   const totalQuestions = clues.reduce((acc, category) => {
     return acc + category.Questions.length;
   }, 0);
@@ -95,6 +97,10 @@ export default function Game(props) {
     }
 
     setVisibleNodes([...result]);
+  };
+
+  const refreshWindow = () => {
+    window.location.reload();
   };
 
   // Put in a small header here where we have like 'restart', 'info', 'exit'
@@ -158,11 +164,7 @@ export default function Game(props) {
             })}
           </div>
           <div className={styles.scoreWrapper}>
-            <h1>Score: {score}</h1>
-            <br />
-            <h1 className={styles.questionCounter}>
-              Questions Left: {state.totalQuestions}
-            </h1>
+            <h1>Score: ${score}</h1>
           </div>
           {showMerkleTree && (
             <MerkleTree
@@ -180,7 +182,13 @@ export default function Game(props) {
         </main>
       )}
       {/* We need to develop an end game screen or continue to next round */}
-      {state.totalQuestions == 0 && <div>No Questions Left</div>}
+      {state.totalQuestions == 0 && (
+        <div className={styles.endGameContainer}>
+          <h1>Final Score: {score}</h1>
+          <h4>Thank you for playing!</h4>
+          <button onClick={refreshWindow}>Restart Game</button>
+        </div>
+      )}
     </div>
   );
 }

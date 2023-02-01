@@ -62,7 +62,7 @@
         padding: 0;
         color: white;
         font-size: 3.5rem;
-        font-family: 'Gyparody Rg', sans-serif;
+        font-family: 'Swiss921 BT', sans-serif;
 
         @media (max-width: 768px) {
             font-size: 2.5rem;
@@ -75,6 +75,35 @@
 
     @media(max-width: 768px){
         flex-direction: column;
+    }
+}
+
+.endGameContainer {
+    text-align: center;
+
+    h1 {
+        font-size: 6rem;
+        font-family: 'Gyparody Rg';
+    }
+
+    h4 {
+        font-size: 2rem; 
+        font-family: 'Monospac821 BT';
+    }
+
+    button {
+        padding: 1rem 0.5rem;
+        font-size: 2rem;
+        background: none;
+        color: white;
+        border: 2px solid white;
+        transition: all 200ms;
+
+        &:hover {
+            background: white;
+            color: black;
+            cursor: pointer;
+        }
     }
 }
 

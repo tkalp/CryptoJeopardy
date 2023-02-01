@@ -149,7 +149,13 @@ export default function Clue(props) {
   }
 
   const showTreeAfterClue = () => {
+    changeViewToBoard();
+    setShowTreeHandler();
+  };
+
+  const changeViewToBoard = () => {
     const target = $("." + styles.fullScreen);
+    $(target).toggleClass(styles.fullScreen);
 
     // Hide Clue Container
     $(target)
@@ -161,9 +167,7 @@ export default function Clue(props) {
       .find("." + styles.formContainer)
       .hide();
 
-    $(target).toggleClass(styles.fullScreen);
     setShowAnswer(false);
-    setShowTreeHandler();
   };
 
   return (
@@ -171,7 +175,7 @@ export default function Clue(props) {
       onClick={changeToFullScreen}
       className={classNames("main-value-box", styles.valueBox)}
     >
-      <Timer secondsParam={15} timerExpireHandler={timerExpireHandler} />
+      <Timer secondsParam={30} timerExpireHandler={timerExpireHandler} />
       <h1 id="value">{"$" + props.value}</h1>
       <div className={styles.clueContainer}>
         <p className={styles.clue} id={`box-question_${componentId}`}>
@@ -208,7 +212,10 @@ export default function Clue(props) {
             SHA256(Clue + Answer) ={" "}
             {SHA256(question.toLowerCase() + answer.toLowerCase())}
           </p>
-          <button onClick={showTreeAfterClue}>Show Tree</button>
+          <div className={styles.btnContainer}>
+            <button onClick={showTreeAfterClue}>Show Tree</button>
+            <button onClick={changeViewToBoard}>Back to Board</button>
+          </div>
         </div>
       )}
     </div>

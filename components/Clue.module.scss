@@ -74,7 +74,7 @@
     text-align: center;
     color: white;
     font-family: 'ITC_ Korinna', sans-serif;
-    font-size:  3rem;
+    font-size:  2.5rem;
     padding: 1.5rem;
     text-transform: uppercase;
     width: 65%;
@@ -181,4 +181,22 @@
         font-family: 'ITC_ Korinna', sans-serif;
     }
 
+}
+
+.btnContainer {
+    button {
+        margin: 1rem;
+        padding: 0.5rem 1rem;
+        font-size: 1.1rem;
+        background: none;
+        color: white;
+        border: 2px solid white;
+        transition: all 200ms;
+
+        &:hover {
+            color: black;
+            background: white;
+            cursor: pointer;
+        }
+    }
 }

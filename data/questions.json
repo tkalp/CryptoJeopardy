@@ -2,32 +2,8 @@
     "Questions": [
         {
             "CategoryID": 1,
-            "Question": "The process of using a one-way mathematical algorithm against data to produce a numeric value that is representative of that data",
+            "Question": "This is a decentralised smart contract system that maintains transactional privacy by not storing financial transactions on the blockchain in plain sight.The compiler automatically creates an effective cryptographic protocol where contractual parties interact with the blockchain using cryptographic primitives like zero-knowledge proofs, so a programmer does not need to implement cryptography in order to create a private smart contract",
             "Answer": "What is hashing?",
-            "Value": 200
-        },
-        {
-            "CategoryID": 1,
-            "Question": "This hashing algorithm has been considered to be insecure since 2008 due to cryptographic weakness",
-            "Answer": "What is MD5?",
-            "Value": 200
-        },
-        {
-            "CategoryID": 1,
-            "Question": "This fixed-size bit string represents a message or a data set and is the output of a cryptographic hash function. It serves as a digital \"fingerprint\" for the input.",
-            "Answer": "What is a hash digest?",
-            "Value": 200
-        },
-        {
-            "CategoryID": 1,
-            "Question": "This can occur when a hashing algorithm produces the same output for different inputs",
-            "Answer": "What is a hash collision?",
-            "Value": 200
-        },
-        {
-            "CategoryID": 1,
-            "Question": "Since 2012, this is currently considered one of the most secure hashing algorithms in this generation",
-            "Answer": "What is SHA3?",
             "Value": 200
         },
         {
