@@ -4,7 +4,9 @@ export default function MerkleTreeInfo(props) {
   return (
     <div className={styles.mainContainer}>
       <div>
-        <button onClick={props.exitMerkleInfoHandler}>Go Back</button>
+        <button onClick={props.exitMerkleInfoHandler}>
+          <Image src="/img/back-arrow.png" height={30} width={30} />
+        </button>
       </div>
       <h1>About The Merkle Tree</h1>
       <ul>

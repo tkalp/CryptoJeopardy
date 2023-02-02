@@ -39,9 +39,6 @@ export default function Home(props) {
       </Head>
       <main className={styles.main}>
         <div className={styles.contentWrapper}>
-          <button onClick={playTheMusic} className={styles.themeSongButton}>
-            <Image src={musicIcon} width={35} height={35} />
-          </button>
           <h1 className={styles.smallerTitle}>Crypto</h1>
           <h1 className={styles.title}>Jeopardy!</h1>
           <div className={styles.buttonsWrapper}>

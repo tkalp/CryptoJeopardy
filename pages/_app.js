@@ -5,7 +5,7 @@ import styles from "../styles/fonts.css";
 export default function App({ Component, pageProps }) {
   return (
     <GameProvider>
-      <Component {...pageProps} />;
+      <Component {...pageProps} />
     </GameProvider>
   );
 }
