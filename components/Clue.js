@@ -26,6 +26,7 @@ export default function Clue(props) {
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [enteredAnswer, setEnteredAnswer] = useState("");
   const [showAnswer, setShowAnswer] = useState(false);
+  const [questionAnswered, setQuestionAnswered] = useState(false);
 
   function timerExpireHandler() {
     questionSubmitHandler();
@@ -86,6 +87,11 @@ export default function Clue(props) {
     if (event != null) {
       event.preventDefault();
     }
+
+    if (questionAnswered) {
+      console.log("question answered");
+      return;
+    }
     // This is the only thing with full screen
     const target = $("." + styles.fullScreen);
 
@@ -95,6 +101,7 @@ export default function Clue(props) {
     $(target).find(".timer-container").hide();
 
     const answerInput = $(`#answer-form_${componentId}`).find("input")[0];
+
     // If we add in a function to check merkle tree, it should be here
     const { merkleTree } = state;
     const root = merkleTree.getRoot().toString("hex");
@@ -147,6 +154,8 @@ export default function Clue(props) {
     dispatch({
       type: ACTION_TYPES.SUBTRACT_QUESTION_COUNT,
     });
+
+    setQuestionAnswered(true);
   }
 
   const showTreeAfterClue = () => {
@@ -206,21 +215,21 @@ export default function Clue(props) {
       </div>
       {showAnswer && (
         <div className={styles.answerContainer}>
-          <p>
-            Answer: <b>{answer.toLowerCase()}</b>
+          <p className={styles.answer}>
+            <b>Answer</b>: {answer.toLowerCase()}
           </p>
           <p>
-            <b>Source:</b> {source}
-          </p>
-          <p>
-            SHA256(Clue + Answer) ={" "}
-            {SHA256(question.toLowerCase() + answer.toLowerCase())}
+            <b>Source:</b> <i>{source}</i>
           </p>
 
           <div className={styles.btnContainer}>
             <button onClick={showTreeAfterClue}>Show Tree</button>
             <button onClick={changeViewToBoard}>Back to Board</button>
           </div>
+          <p>
+            SHA256(Clue + Answer) ={" "}
+            {SHA256(question.toLowerCase() + answer.toLowerCase())}
+          </p>
         </div>
       )}
     </div>
