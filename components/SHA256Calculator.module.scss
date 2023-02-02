@@ -2,6 +2,7 @@
     position: fixed;
     width: 100vw;
     height: 100vh;
+    overflow-y: scroll;
     top: 0;
     background: #050a8f;
 }
@@ -16,12 +17,13 @@
 
 .headerContainer {
     border-bottom: 3px solid white;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
+
     h1 {
         margin: 0;
         padding: 0;
-        font-family: 'ITC Korinna Std';
-        font-size: 3rem;
+        font-family: 'Swis721 BT';
+        font-size: 2rem;
     }
 }
 
@@ -31,16 +33,17 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    margin-bottom: 5rem;
+    margin-bottom: 2rem;
+    
     h1 {
         margin: 0;
         padding: 0;
-        font-size: 2.5rem;
+        font-size: 2rem;
         font-family: 'Swis721 BT';
     }
 
     textarea {
-        width: 60%;
+        width: 50%;
         height: 10vh;
         resize: none;
         font-size: 1.5rem;
@@ -52,26 +55,29 @@
 
     label {
         margin-right: 0.3rem;
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 
     select {
-        font-size: 1.1rem;
+        font-size: 1rem;
     }
 }
 
 .infoContainer {
-    width: 70%;
+    width: 80%;
     ul {
-        list-style: none;
         width: 100%;
         margin: auto;
 
         li {
             margin: 0.3rem;
-            font-family: 'Korinna';
-            font-size: 1.2rem;
+            font-family: 'Swis721 BT';
+            font-size: 1rem;
         }
+    }
+
+    p {
+        font-family: 'Swis721 BT';
     }
 }
 

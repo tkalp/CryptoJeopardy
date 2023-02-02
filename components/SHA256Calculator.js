@@ -55,34 +55,43 @@ export default function SHA256Calculator(props) {
           <h1>SHA256 Output</h1>
           <textarea disabled value={hashedValue} />
         </div>
+
         <div className={styles.infoContainer}>
+          <p>
+            <b>Note:</b> In checking the hashes for the game, remember that they
+            are in the form of SHA256(lowercase(clue + answer))
+          </p>
+          <p>
+            <b>
+              <u>Steps</u>
+            </b>
+          </p>
           <ul>
             <li>
-              <b>Note:</b> If you are checking the hashes for the game, remember
-              that it is in the form of SHA256(lower_case(clue + answer))
+              Find the hash you’re verifying by using the "text" selection in
+              the input type
             </li>
-            <li>
-              First find the hash of the data you are checking by using the
-              "text" selection in the input type
-            </li>
-            <li>
-              Once you have the hex value, copy it and change the input type to
-              hex
-            </li>
-            <li>Do not include the `0x` when you are computing these hashes</li>
-            <li>
-              Example, let the clue be "A string of bits that allows someone to
-              encrypt or decrypt data"
-            </li>
-            <li>Let the answer be "What is a key?"</li>
+            <li>Using the hex value, copy and change the input type to hex</li>
+          </ul>
+          <p>
+            <b>
+              <u>Example</u>
+            </b>
+          </p>
+          <p>
+            Question: "A string of bits that allows someone to encrypt or
+            decrypt data"
+          </p>
+          <p>Answer: "What is a key?"</p>
+          <ul>
             <li>
               The hash calculated in the game is SHA256(a string of bits that
               allows someone to encrypt or decrypt datawhat is a key?) =
               184b5...
             </li>
             <li>
-              Then switch the input type to hex and continously hash the
-              concatenattion of the hash and the next proof to get to the root.
+              Switch the input type to hex and continuously hash the
+              concatenation of the hash and the next proof to get to the root.
             </li>
           </ul>
         </div>
