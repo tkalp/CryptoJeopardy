@@ -34,6 +34,16 @@ For our project, we not only want to test out the knowledge of these foundations
 
 .....and many more, we don't want to spoil the whole game for you.
 
+## Jeopardy Style
+To further elaborate, a programmable game was selected as research showed it is a promising teaching approach that aids in fostering student learning, as well has shown to be an effective learning tool. The main focus is to share in-depth knowledge with users through a point based incentive structure ideally aiding in the retention of information that may or may not aid in correctly answering further complex questions. The game audience and users are assumed to be students or scholars but can be enjoyed by anyone with an interest or base knowledge of Cryptography. 
+
+Originally, there was no theme to convey the overall importance of Cryptography. The game had a multitude of random categories varying in topics all under the subject of cryptography. There was no shortage of research materials, but focus was lost, the game felt disorganized, and questions felt to be more complex. So a version theme was added, becoming the driver to questions, correlating categories sand overall giving the game a more focused feel. Now, with theme fundamental categories are present in addition to themed categorizes correlated to blockchain.
+
+## Merkle Trees  
+In addition, we have also added a Merkle Tree as a means of validation to the game and demonstrating a crucial component of blockchains. A Merkle Tree is a type of data structure that is used to validate the integrity of data in a distributed system. It works by taking a set of data, such as the clues and answers to the questions in a jeopardy game, and creating a hash of each piece of data. These hashes are then combined in pairs to create a new set of hashes, and this process is repeated until a single hash, called the root hash, is generated. We have chosen the SHA256 hashing algorithm to continuously hash these values. Now we can use this root hash as a fingerprint of the entire set of data, and any changes to the data can be detected by comparing the root hash to a previously recorded value. Not only this, but we can validate that answers are correct to clue by checking the proof against the Merkle Tree.
+
+By implementing a Merkle Tree within our jeopardy game, it provides a way to ensure the integrity of the answers data and prevent malicious actors from tampering with it. This means that players can have confidence that the game is fair and that all players are playing on a level playing field.
+
 ## How to Run
 This project was developed using the Next.js Framework which mainly uses React for the UI and JavaScript for the backend. If you would like to clone this app and test it on your local machine. You can do so by doing the following
 
