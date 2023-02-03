@@ -1,7 +1,12 @@
 # Crypto Jeopardy
 
-Currently a work in progress...check back soon :)
+## Decentralized Dilemmas: A Blockchain Jeopardy Challenge
+The practice of securing communication by transforming plaintext into unreadable ciphertext, and vice versa, using mathematical algorithms and secret keys...What is Cryptography?
 
+## Introduction
+So… Let’s talk about the exciting world of Cryptography, demystify the belief of its complexity, build on fundamental knowledge and challenge you to learn more about the fundamental, objectives, uses, methods and even humor regarding cryptography.  How about we make a game of it and test your knowledge as you attempt to gain the highest score, in a game of Jeopardy. Each round will have category specific questions in the form of statements and answers required in the form of questions. Are you up for the challenge? What if we make it even more interesting and specialize the game to see how much you know about blockchains? 
+
+## How to Run
 This project was developed using the Next.js Framework which mainly uses React for the UI and JavaScript for the backend. If you would like to clone this app and test it on your local machine. You can do so by doing the following
 
 1. First, install <a href="https://nodejs.org/en/" target="_blank">Node.js</a>
