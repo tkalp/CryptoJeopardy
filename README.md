@@ -56,3 +56,5 @@ This project was developed using the Next.js Framework which mainly uses React f
 
 
 But again...the game is not finished yet, so you may see some creepy crawly bugs!
+
+You can also play the beta version of the game <a href="https://crypto-jeopardy.vercel.app/">here</a>
