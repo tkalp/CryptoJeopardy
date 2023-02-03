@@ -1,5 +1,5 @@
 import styles from "./MerkleTreeInfo.module.scss";
-
+import Image from "next/image";
 export default function MerkleTreeInfo(props) {
   return (
     <div className={styles.mainContainer}>
