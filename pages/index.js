@@ -32,7 +32,7 @@ export default function Home(props) {
         <title>Crypto Jeopardy</title>
         <meta
           name="description"
-          content="Welcome to the next-generation jeopardy with cryptographic matriasl."
+          content="Welcome to the next-generation jeopardy with cryptographic materials."
         />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/favicon.ico" />
