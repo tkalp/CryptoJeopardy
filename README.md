@@ -6,7 +6,7 @@ The practice of securing communication by transforming plaintext into unreadable
 ## Introduction
 So… Let’s talk about the exciting world of Cryptography, demystify the belief of its complexity, build on fundamental knowledge and challenge you to learn more about the fundamental, objectives, uses, methods and even humor regarding cryptography.  How about we make a game of it and test your knowledge as you attempt to gain the highest score, in a game of Jeopardy. Each round will have category specific questions in the form of statements and answers required in the form of questions. Are you up for the challenge? What if we make it even more interesting and specialize the game to see how much you know about blockchains? 
 
-##
+## Blockchain Of Trust
 
 So why did we select blockchain as the specialty topic for our Jeopardy game? Blockchain technology is a revolutionary new way of storing and transferring data that is quickly gaining traction in a wide range of industries. At its core, blockchain combines cryptographic techniques and a decentralized architecture to provide three key features: confidentiality, integrity, and availability (CIA Triad). 
 
