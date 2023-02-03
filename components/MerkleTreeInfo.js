@@ -4,7 +4,10 @@ export default function MerkleTreeInfo(props) {
   return (
     <div className={styles.mainContainer}>
       <div>
-        <button onClick={props.exitMerkleInfoHandler}>
+        <button
+          onClick={props.exitMerkleInfoHandler}
+          className={styles.backButton}
+        >
           <Image src="/img/back-arrow.png" height={30} width={30} />
         </button>
       </div>
